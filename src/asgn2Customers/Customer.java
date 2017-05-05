@@ -11,7 +11,11 @@ import asgn2Exceptions.CustomerException;
  * @author Person B
 */
 public abstract class Customer {
-
+	private String name;
+	private String mobileNumber;
+	private int locationX;
+	private int locationY;
+	private String type;
 
 	/**
 	 *  This class represents a customer of the Pizza Palace restaurant.  A detailed description of the class's fields
@@ -32,6 +36,29 @@ public abstract class Customer {
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
 		// TO DO
+		if (name.length() > 1 && name.length() <= 20 && !containsOnlyWhiteSpaces(name)) {
+			this.name = name;
+		}
+		
+		if (mobileNumber.length() == 10 && mobileNumber.charAt(0) == 0) {
+			this.mobileNumber = mobileNumber;
+		}
+		
+		this.locationX = locationX;
+		this.locationY = locationY;
+		this.type = type;
+	}
+	
+	private boolean containsOnlyWhiteSpaces(String string) {
+		boolean onlyWhiteSpaces = true;
+		
+		for (String character : string.split("")) {
+			if (!character.equals(" ")) {
+				onlyWhiteSpaces = false;
+			}
+		}
+		
+		return onlyWhiteSpaces;
 	}
 	
 	/**
@@ -39,7 +66,7 @@ public abstract class Customer {
 	 * @return The Customer's name.
 	 */
 	public final String getName(){
-		// TO DO
+		return name;
 	}
 	
 	/**
@@ -47,7 +74,7 @@ public abstract class Customer {
 	 * @return The Customer's mobile number.
 	 */
 	public final String getMobileNumber(){
-		// TO DO
+		return mobileNumber;
 	}
 
 	/**
@@ -56,7 +83,7 @@ public abstract class Customer {
 	 * @return A human understandable description of the Customer's type.
 	 */
 	public final String getCustomerType(){
-		// TO DO
+		return type;
 	}
 	
 	/**
@@ -65,7 +92,7 @@ public abstract class Customer {
 	 * @return The Customer's X location
 	 */
 	public final int getLocationX(){
-		// TO DO
+		return locationX;
 	}
 
 	/**
@@ -74,7 +101,7 @@ public abstract class Customer {
 	 * @return The Customer's Y location
 	 */
 	public final int getLocationY(){
-		// TO DO
+		return locationY;
 	}
 
 	/**
