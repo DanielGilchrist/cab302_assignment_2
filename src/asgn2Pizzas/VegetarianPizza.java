@@ -2,6 +2,7 @@ package asgn2Pizzas;
 
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import asgn2Exceptions.PizzaException;
 
@@ -19,6 +20,16 @@ import asgn2Exceptions.PizzaException;
 public class VegetarianPizza extends Pizza {
 
     private static final double VEGETARIAN_PRICE = 10.0;
+
+    private final ArrayList<PizzaTopping> pizzaTopping = new ArrayList<PizzaTopping>() {
+        {
+            pizzaTopping.add(PizzaTopping.TOMATO);
+            pizzaTopping.add(PizzaTopping.CHEESE);
+            pizzaTopping.add(PizzaTopping.EGGPLANT);
+            pizzaTopping.add(PizzaTopping.MUSHROOM);
+            pizzaTopping.add(PizzaTopping.CAPSICUM);
+        }
+    };
 
     /**
      * 
@@ -48,6 +59,7 @@ public class VegetarianPizza extends Pizza {
      */
     public VegetarianPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
         super(quantity, deliveryTime, deliveryTime, "Vegetarian", VEGETARIAN_PRICE);
+        super.pizzaTopping = this.pizzaTopping;
     }
 
 }

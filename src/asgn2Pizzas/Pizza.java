@@ -20,33 +20,11 @@ import asgn2Exceptions.PizzaException;
 public abstract class Pizza {
 
     // constants and static variables
+    private static final int MINIMUM_QUANTITY = 1;
+    private static final int MAXIMUM_QUANTITY = 10;
     private static final LocalTime OPENING_TIME = LocalTime.of(19, 0, 0);
     private static final LocalTime CLOSING_TIME = LocalTime.of(23, 0, 0);
     private static final long MILLISECONDS_PER_HOUR = 3600000;
-    private final ArrayList<PizzaTopping> margherita = new ArrayList<PizzaTopping>() {
-        {
-            margherita.add(PizzaTopping.TOMATO);
-            margherita.add(PizzaTopping.CHEESE);
-        }
-    };
-    private final ArrayList<PizzaTopping> vegetarian = new ArrayList<PizzaTopping>() {
-        {
-            vegetarian.add(PizzaTopping.TOMATO);
-            vegetarian.add(PizzaTopping.CHEESE);
-            vegetarian.add(PizzaTopping.EGGPLANT);
-            vegetarian.add(PizzaTopping.MUSHROOM);
-            vegetarian.add(PizzaTopping.CAPSICUM);
-        }
-    };
-    private final ArrayList<PizzaTopping> meatLovers = new ArrayList<PizzaTopping>() {
-        {
-            meatLovers.add(PizzaTopping.TOMATO);
-            meatLovers.add(PizzaTopping.CHEESE);
-            meatLovers.add(PizzaTopping.BACON);
-            meatLovers.add(PizzaTopping.PEPPERONI);
-            meatLovers.add(PizzaTopping.SALAMI);
-        }
-    };
 
     // private variables
     private int quantity;
@@ -55,7 +33,7 @@ public abstract class Pizza {
     private String type;
     private double price;
     private double cost;
-    private ArrayList<PizzaTopping> pizzaTopping;
+    protected ArrayList<PizzaTopping> pizzaTopping;
 
     /**
      * This class represents a pizza produced at the Pizza Palace restaurant. A
@@ -84,7 +62,7 @@ public abstract class Pizza {
     public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price)
             throws PizzaException {
 
-        if (!isValidQuantity(quantity) || !isValidTime(orderTime, deliveryTime) || !isValidType(type)) {
+        if (!isValidQuantity(quantity) || !isValidTime(orderTime, deliveryTime)) {
             throw new PizzaException();
         }
         this.quantity = quantity;
@@ -93,35 +71,16 @@ public abstract class Pizza {
         this.type = type;
         this.price = price;
 
-        setPizzaTopping(type);
-    }
-
-    private void setPizzaTopping(String type) {
-        switch (type) {
-        case "Margherita":
-            this.pizzaTopping = new ArrayList<PizzaTopping>(margherita);
-            break;
-        case "Vegetarian":
-            this.pizzaTopping = new ArrayList<PizzaTopping>(vegetarian);
-            break;
-        case "Meat Lovers":
-            this.pizzaTopping = new ArrayList<PizzaTopping>(meatLovers);
-            break;
-        }
     }
 
     private boolean isValidQuantity(int quantity) {
-        return (quantity > 0 && quantity <= 10);
+        return (quantity >= MINIMUM_QUANTITY && quantity <= MAXIMUM_QUANTITY);
     }
 
     private boolean isValidTime(LocalTime orderTime, LocalTime deliveryTime) {
         long elapsedTime = Duration.between(orderTime, deliveryTime).toMillis();
         return (orderTime.isAfter(OPENING_TIME) && orderTime.isBefore(CLOSING_TIME))
                 && deliveryTime.isAfter(OPENING_TIME) && elapsedTime < MILLISECONDS_PER_HOUR;
-    }
-
-    private boolean isValidType(String type) {
-        return (type.equals("Margherita") || type.equals("Vegetarian") || type.equals("Meat Lovers"));
     }
 
     /**
