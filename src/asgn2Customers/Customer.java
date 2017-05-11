@@ -36,12 +36,16 @@ public abstract class Customer {
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
 		// TO DO
-		if (name.length() > 1 && name.length() <= 20 && !containsOnlyWhiteSpaces(name)) {
+		if (name.length() > 1 && name.length() <= 20 && name.trim().length() > 0) {
 			this.name = name;
+		} else {
+			throw new CustomerException("Customer name is invalid. (Length must be between 1 and 20 and cannot be only whitespaces");
 		}
 		
 		if (mobileNumber.length() == 10 && mobileNumber.charAt(0) == 0) {
 			this.mobileNumber = mobileNumber;
+		} else {
+			throw new CustomerException("Mobile number is invalid. (length must be 10 and must begin with 0)");
 		}
 		
 		if (type.equals("Pick Up")) {
@@ -52,18 +56,6 @@ public abstract class Customer {
 		}
 		
 		this.type = type;
-	}
-	
-	private boolean containsOnlyWhiteSpaces(String string) {
-		boolean onlyWhiteSpaces = true;
-		
-		for (String character : string.split("")) {
-			if (!character.equals(" ")) {
-				onlyWhiteSpaces = false;
-			}
-		}
-		
-		return onlyWhiteSpaces;
 	}
 	
 	/**
