@@ -35,21 +35,24 @@ public abstract class Customer {
 	 * 
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
-		// TO DO
-		if (name.length() > 1 && name.length() <= 20 && name.trim().length() > 0) {
+		if (name.length() >= 1 && name.length() <= 20 && name.trim().length() > 0) {
 			this.name = name;
 		} else {
-			throw new CustomerException("Customer name is invalid. (Length must be between 1 and 20 and cannot be only whitespaces");
+			throw new CustomerException("Customer name is invalid. (Length must be between 1 and 20 (inclusive) and cannot be only whitespaces");
 		}
 		
 		if (mobileNumber.length() == 10 && mobileNumber.charAt(0) == 0) {
 			this.mobileNumber = mobileNumber;
 		} else {
-			throw new CustomerException("Mobile number is invalid. (length must be 10 and must begin with 0)");
+			throw new CustomerException("Mobile number is invalid. (Length must be 10 and must begin with 0)");
 		}
 		
-		if (type.equals("Pick Up")) {
-			this.locationX = this.locationY = 0;
+		if (type.equals("Pick Up") && locationX != 0 && locationY != 0) {
+			throw new CustomerException("Pick Up coordinates are invalid. (Must be 0 for both x and y coordinates)");
+		} else if (type.equals("Driver Delivery") && locationX == 0 && locationY == 0) {
+			throw new CustomerException("Driver Delivery coordinates are invalid. (Can't be 0 for both x any y coordinates)");
+		} else if (type.equals("Drone Delivery") && locationX == 0 && locationY == 0) {
+			throw new CustomerException("Drone Delivery coordinates are invalid. (Can't be 0 for both x and y coordinates)");
 		} else {
 			this.locationX = locationX;
 			this.locationY = locationY;
