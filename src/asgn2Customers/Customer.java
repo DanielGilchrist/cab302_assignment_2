@@ -44,8 +44,13 @@ public abstract class Customer {
 			this.mobileNumber = mobileNumber;
 		}
 		
-		this.locationX = locationX;
-		this.locationY = locationY;
+		if (type.equals("Pick Up")) {
+			this.locationX = this.locationY = 0;
+		} else {
+			this.locationX = locationX;
+			this.locationY = locationY;
+		}
+		
 		this.type = type;
 	}
 	
