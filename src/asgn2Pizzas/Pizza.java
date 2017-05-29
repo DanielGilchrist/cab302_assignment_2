@@ -25,6 +25,7 @@ public abstract class Pizza {
     private static final LocalTime OPENING_TIME = LocalTime.of(19, 0, 0);
     private static final LocalTime CLOSING_TIME = LocalTime.of(23, 0, 0);
     private static final long MILLISECONDS_PER_HOUR = 3600000;
+    private static final long MILLISECONDS_PER_TEN_MINUTES = 600000;
 
     // private variables
     private int quantity;
@@ -80,7 +81,8 @@ public abstract class Pizza {
     private boolean isValidTime(LocalTime orderTime, LocalTime deliveryTime) {
         long elapsedTime = Duration.between(orderTime, deliveryTime).toMillis();
         return (orderTime.isAfter(OPENING_TIME) && orderTime.isBefore(CLOSING_TIME))
-                && deliveryTime.isAfter(OPENING_TIME) && elapsedTime < MILLISECONDS_PER_HOUR;
+                && deliveryTime.isAfter(OPENING_TIME) && elapsedTime < MILLISECONDS_PER_HOUR
+                && elapsedTime > MILLISECONDS_PER_TEN_MINUTES;
     }
 
     /**
