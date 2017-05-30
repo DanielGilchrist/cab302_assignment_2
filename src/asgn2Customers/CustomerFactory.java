@@ -27,7 +27,16 @@ public class CustomerFactory {
 	 * @return A valid PickUpCustomer, DriverDeliveryCustomer or DroneDeliveryCustomer depending on the customerCode.
 	 * @throws CustomerException if the customerCode is not one of the three valid codes listed in Section 5.3 of the Assignment Specification. 
 	 */
-	public static Customer getCustomer(String customerCode, String name, String mobileNumber, int locationX,  int locationY) throws CustomerException{
-		// TO DO
+	public static Customer getCustomer(String customerCode, String name, String mobileNumber, int locationX,  int locationY) throws CustomerException {
+		switch (customerCode) {
+			case "PUC": 
+				return new PickUpCustomer(name, mobileNumber, locationX, locationY);
+			case "DNC": 
+				return new DroneDeliveryCustomer(name, mobileNumber, locationX, locationY);
+			case "DVC": 
+				return new DriverDeliveryCustomer(name, mobileNumber, locationX, locationY);
+			default: 
+				throw new CustomerException("Customer Code is invalid.");
+		}
 	}
 }

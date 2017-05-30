@@ -34,7 +34,7 @@ public abstract class Customer {
 	 * @throws CustomerException if supplied parameters are invalid 
 	 * 
 	 */
-	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
+	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException {
 		if (name.length() >= 1 && name.length() <= 20 && name.trim().length() > 0) {
 			this.name = name;
 		} else {

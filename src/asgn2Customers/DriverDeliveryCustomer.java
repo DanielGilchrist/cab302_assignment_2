@@ -28,7 +28,7 @@ public class DriverDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DriverDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		// TO DO
+		super(name, mobileNumber, locationX, locationY, "Driver Delivery");
 	}
 	
 	/**
@@ -38,6 +38,7 @@ public class DriverDeliveryCustomer extends Customer {
 	 * @return The distance between the restaurant and the customer in Manhattan distance.
 	 */
 	@Override
-	public double getDeliveryDistance() {	}
-
+	public double getDeliveryDistance() {	
+		return Math.abs(0 - getLocationX()) + Math.abs(0 - getLocationY());
+	}
 }
