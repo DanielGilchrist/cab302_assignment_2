@@ -28,9 +28,9 @@ public class CustomerFactoryTests {
     @Test
     @Before
     public void testTheFactory() throws CustomerException {
-        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0123456789", 0, 0);
-        Customer droneDelivery = CustomerFactory.getCustomer("DNC", "David Smith", "0123455555", 5, 5);
-        Customer driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "0123456666", 5, 5);
+        pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0123456789", 0, 0);
+        droneDelivery = CustomerFactory.getCustomer("DNC", "David Smith", "0123455555", 5, 5);
+        driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "0123456666", 5, 5);
     }
 
     // -------------------------- Test the objects ---------------------------//
