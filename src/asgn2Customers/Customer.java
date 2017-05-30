@@ -41,7 +41,7 @@ public abstract class Customer {
 			throw new CustomerException("Customer name is invalid. (Length must be between 1 and 20 (inclusive) and cannot be only whitespaces");
 		}
 		
-		if (mobileNumber.length() == 10 && mobileNumber.charAt(0) == 0) {
+		if (mobileNumber.length() == 10 && mobileNumber.charAt(0) == '0') {
 			this.mobileNumber = mobileNumber;
 		} else {
 			throw new CustomerException("Mobile number is invalid. (Length must be 10 and must begin with 0)");
