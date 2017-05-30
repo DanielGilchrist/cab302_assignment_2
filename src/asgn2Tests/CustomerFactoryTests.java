@@ -98,19 +98,22 @@ public class CustomerFactoryTests {
     }
 
     // ----------------------------- Long name -------------------------------//
-    @Test(expected = CustomerException.class)
+    @Test
     public void testLongName1() throws CustomerException {
         Customer pickup = CustomerFactory.getCustomer("PUC", "John David Smith Jr.", "0123456789", 0, 0);
+        assertEquals(true, pickup instanceof PickUpCustomer);
     }
 
-    @Test(expected = CustomerException.class)
+    @Test
     public void testLongName2() throws CustomerException {
         Customer droneDelivery = CustomerFactory.getCustomer("DNC", "John David Smith Jr.", "0123455555", 5, 5);
+        assertEquals(true, droneDelivery instanceof DroneDeliveryCustomer);
     }
 
-    @Test(expected = CustomerException.class)
+    @Test
     public void testLongName3() throws CustomerException {
         Customer driverDelivery = CustomerFactory.getCustomer("DVC", "John David Smith Jr.", "0123456666", 5, 5);
+        assertEquals(true, driverDelivery instanceof DriverDeliveryCustomer);
     }
 
     // ----------------------------- Longer name -----------------------------//
