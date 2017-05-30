@@ -47,15 +47,19 @@ public abstract class Customer {
 			throw new CustomerException("Mobile number is invalid. (Length must be 10 and must begin with 0)");
 		}
 		
-		if (type.equals("Pick Up") && locationX != 0 && locationY != 0) {
-			throw new CustomerException("Pick Up coordinates are invalid. (Must be 0 for both x and y coordinates)");
-		} else if (type.equals("Driver Delivery") && locationX == 0 && locationY == 0) {
-			throw new CustomerException("Driver Delivery coordinates are invalid. (Can't be 0 for both x any y coordinates)");
-		} else if (type.equals("Drone Delivery") && locationX == 0 && locationY == 0) {
-			throw new CustomerException("Drone Delivery coordinates are invalid. (Can't be 0 for both x and y coordinates)");
+		if (locationX > 10 || locationX < -10 || locationY > 10 || locationY < -10) {
+			throw new CustomerException("Customer is located too far away from the restaurant to deliver.");
 		} else {
-			this.locationX = locationX;
-			this.locationY = locationY;
+			if (type.equals("Pick Up") && (locationX != 0 || locationY != 0)) {
+				throw new CustomerException("Pick Up coordinates are invalid. (Must be 0 for both x and y coordinates)");
+			} else if (type.equals("Driver Delivery") && locationX == 0 && locationY == 0) {
+				throw new CustomerException("Driver Delivery coordinates are invalid. (Can't be 0 for both x any y coordinates)");
+			} else if (type.equals("Drone Delivery") && locationX == 0 && locationY == 0) {
+				throw new CustomerException("Drone Delivery coordinates are invalid. (Can't be 0 for both x and y coordinates)");
+			} else {
+				this.locationX = locationX;
+				this.locationY = locationY;
+			}
 		}
 		
 		this.type = type;
