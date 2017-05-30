@@ -36,7 +36,7 @@ public class CustomerFactory {
 			case "DVC": 
 				return new DriverDeliveryCustomer(name, mobileNumber, locationX, locationY);
 			default: 
-				throw new CustomerException("Customer Code is invalid.");
+				throw new CustomerException("Customer code is invalid.");
 		}
 	}
 }
