@@ -97,6 +97,12 @@ public class PizzaTests {
 				meatlovers.getOrderProfit(), 0);
 	}
 	
+	// tests getOrderProfit before the cost has been calculated
+	@Test 
+	public void testGetOrderProfitNotCalculated() {
+		assertEquals(MEATLOVERS_PRICE * QUANTITY, meatlovers.getOrderProfit(), 0);
+	}
+	
 	// tests containsTopping() with a topping that is on meatlovers pizza
 	@Test
 	public void testContainsToppingToppingExists() {
