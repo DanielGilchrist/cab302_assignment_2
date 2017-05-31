@@ -148,6 +148,37 @@ public class CustomerFactoryTests {
         Customer driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "", 5, 5);
     }
 
+    // ------------------------ Tricky PhoneNumber ---------------------------//
+    @Test(expected = CustomerException.class)
+    public void testWhitePhoneNumber() throws CustomerException {
+        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "          ", 0, 0);
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testWhitePhoneNumberWithZero() throws CustomerException {
+        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0         ", 0, 0);
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testWhitePhoneNumberWith2Zero() throws CustomerException {
+        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0        0", 0, 0);
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testPhoneNumberWithZeroAndDashes() throws CustomerException {
+        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0--------0", 0, 0);
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testPhoneNumberWithSpecialCharacters() throws CustomerException {
+        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0--$%&@--0", 0, 0);
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testPhoneNumberWithLetters() throws CustomerException {
+        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0asdrefdopo", 0, 0);
+    }
+
     // -------------------------- Short PhoneNumber --------------------------//
     @Test(expected = CustomerException.class)
     public void testShortPhoneNumber1() throws CustomerException {
@@ -308,5 +339,7 @@ public class CustomerFactoryTests {
         Customer driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "0123456666", 5, 10);
         assertEquals(true, driverDelivery instanceof DriverDeliveryCustomer);
     }
+
+    // --------------------------------------------------------------------- //
 
 }

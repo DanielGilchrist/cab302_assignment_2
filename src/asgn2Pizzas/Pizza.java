@@ -24,8 +24,8 @@ public abstract class Pizza {
     private static final int MAXIMUM_QUANTITY = 10;
     private static final LocalTime OPENING_TIME = LocalTime.of(19, 0, 0);
     private static final LocalTime CLOSING_TIME = LocalTime.of(23, 0, 0);
-    private static final long MILLISECONDS_PER_HOUR = 3600000;
-    private static final long MILLISECONDS_PER_TEN_MINUTES = 600000;
+    private static final long ONE_HOUR = 3600000;
+    private static final long TEN_MINUTES = 600000;
 
     // private variables
     private int quantity;
@@ -63,8 +63,14 @@ public abstract class Pizza {
     public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price)
             throws PizzaException {
 
-        if (!isValidQuantity(quantity) || !isValidTime(orderTime, deliveryTime)) {
-            throw new PizzaException();
+        if (!isValidQuantity(quantity)) {
+            throw new PizzaException("Quantity can only be between 1 and 10 inclusive!");
+        } else if (!isValidOrderTime(orderTime)) {
+            throw new PizzaException("Order time must be during working hours!");
+        } else if (!isValidDeliveryTime(deliveryTime)) {
+            throw new PizzaException("Orders must deliver after opening time!");
+        } else if (!isValidElapsedTime(orderTime, deliveryTime)) {
+            throw new PizzaException("A pizza cannot be delivered in less than 10 minutes or longer than an hour");
         }
         this.quantity = quantity;
         this.orderTime = orderTime;
@@ -74,15 +80,21 @@ public abstract class Pizza {
 
     }
 
+    private boolean isValidDeliveryTime(LocalTime deliveryTime) {
+        return deliveryTime.isAfter(OPENING_TIME);
+    }
+
+    private boolean isValidOrderTime(LocalTime orderTime) {
+        return (orderTime.isAfter(OPENING_TIME) && orderTime.isBefore(CLOSING_TIME));
+    }
+
     private boolean isValidQuantity(int quantity) {
         return (quantity >= MINIMUM_QUANTITY && quantity <= MAXIMUM_QUANTITY);
     }
 
-    private boolean isValidTime(LocalTime orderTime, LocalTime deliveryTime) {
+    private boolean isValidElapsedTime(LocalTime orderTime, LocalTime deliveryTime) {
         long elapsedTime = Duration.between(orderTime, deliveryTime).toMillis();
-        return (orderTime.isAfter(OPENING_TIME) && orderTime.isBefore(CLOSING_TIME))
-                && deliveryTime.isAfter(OPENING_TIME) && elapsedTime < MILLISECONDS_PER_HOUR
-                && elapsedTime > MILLISECONDS_PER_TEN_MINUTES;
+        return elapsedTime <= ONE_HOUR && !(elapsedTime <= TEN_MINUTES);
     }
 
     /**
