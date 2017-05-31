@@ -3,6 +3,7 @@ package asgn2Pizzas;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import asgn2Exceptions.PizzaException;
 
@@ -21,15 +22,13 @@ public class MeatLoversPizza extends Pizza {
 
     private static final double MEATLOVERS_PRICE = 12.0;
 
-    private final ArrayList<PizzaTopping> pizzaTopping = new ArrayList<PizzaTopping>() {
-        {
-            pizzaTopping.add(PizzaTopping.TOMATO);
-            pizzaTopping.add(PizzaTopping.CHEESE);
-            pizzaTopping.add(PizzaTopping.BACON);
-            pizzaTopping.add(PizzaTopping.PEPPERONI);
-            pizzaTopping.add(PizzaTopping.SALAMI);
-        }
-    };
+    private final ArrayList<PizzaTopping> pizzaTopping = new ArrayList<PizzaTopping>(Arrays.asList(
+		PizzaTopping.TOMATO,
+		PizzaTopping.CHEESE,
+		PizzaTopping.BACON,
+		PizzaTopping.PEPPERONI,
+		PizzaTopping.SALAMI
+    ));
 
     /**
      * 
@@ -58,7 +57,7 @@ public class MeatLoversPizza extends Pizza {
      *
      */
     public MeatLoversPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
-        super(quantity, deliveryTime, deliveryTime, "Meat Lovers", MEATLOVERS_PRICE);
+        super(quantity, orderTime, deliveryTime, "Meat Lovers", MEATLOVERS_PRICE);
         super.pizzaTopping = this.pizzaTopping;
     }
 
