@@ -1,11 +1,18 @@
 package asgn2Restaurant;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.lang.reflect.Array;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import asgn2Customers.Customer;
+import asgn2Customers.CustomerFactory;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
+import asgn2Pizzas.PizzaFactory;
 
 /**
  * This class acts as a ‘model’ of a pizza restaurant. It contains an ArrayList of Pizza objects and an ArrayList of  Customer objects.
@@ -53,8 +60,34 @@ public class PizzaRestaurant {
 	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above (passed by another class).
      *
 	 */
-	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
-		// TO DO
+	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException {
+		/*LocalTime orderTime = null;
+		LocalTime deliveryTime = null;
+		String customerName = null;
+		String customerMobile = null;
+		String customerCode = null;
+		int locationX = 0;
+		int locationY = 0;
+		String pizzaCode = null;
+		int pizzaQuantity = 0; */
+		String line = null;
+		
+		
+		ArrayList<String> words = new ArrayList<>();
+		FileReader fileReader = new FileReader(filename);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		
+		while ((line = bufferedReader.readLine()) != null) {
+			words.addAll(Arrays.asList(line.split(",")));
+			
+			customers.add(CustomerFactory.getCustomer(words.get(4), words.get(2), words.get(3), 
+					Integer.parseInt(words.get(5)), Integer.parseInt(words.get(6))));
+			
+			pizzas.add(PizzaFactory.getPizza(words.get(7), Integer.parseInt(words.get(8)), 
+					LocalTime.parse(words.get(0)), LocalTime.parse(words.get(1))));
+			
+			words.clear();
+		}
 	}
 
 	/**
