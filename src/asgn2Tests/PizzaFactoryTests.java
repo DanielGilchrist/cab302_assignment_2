@@ -96,25 +96,4 @@ public class PizzaFactoryTests {
 	public void testPizzaFactoryDeliveryOverOneHourAfterOrder() throws PizzaException {
 		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, ORDER_TIME, ORDER_TIME.plusHours(2));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
