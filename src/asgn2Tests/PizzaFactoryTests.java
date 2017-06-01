@@ -63,13 +63,15 @@ public class PizzaFactoryTests {
 	@SuppressWarnings("unused")
 	@Test
 	public void testPizzaFactoryOrderOnOpeningTime() throws PizzaException {
-		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(19, 0), DELIVERY_TIME);
+		LocalTime orderTime = LocalTime.of(19, 0);
+		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, orderTime, orderTime.plusMinutes(20));
 	}
 	
 	@SuppressWarnings("unused")
 	@Test
 	public void testPizzaFactoryOrderOnCloseTime() throws PizzaException {
-		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(23, 0), DELIVERY_TIME);
+		LocalTime orderTime = LocalTime.of(23, 0);
+		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, orderTime, orderTime.plusMinutes(20));
 	}
 	
 	@SuppressWarnings("unused")
@@ -81,7 +83,7 @@ public class PizzaFactoryTests {
 	@SuppressWarnings("unused")
 	@Test
 	public void testPizzaFactoryDeliveryShortlyAfterClose() throws PizzaException {
-		LocalTime orderTime = LocalTime.of(11, 00);
+		LocalTime orderTime = LocalTime.of(23, 00);
 		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, orderTime, orderTime.plusMinutes(15));
 	}
 	
