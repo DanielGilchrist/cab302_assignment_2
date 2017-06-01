@@ -10,10 +10,15 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import asgn2Restaurant.PizzaRestaurant;
@@ -41,6 +47,8 @@ import asgn2Restaurant.PizzaRestaurant;
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
 
+    private static final int COL = 5;
+    private static final int ROW = 10;
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
 
@@ -61,24 +69,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     private JScrollPane pizzaTable;
     private JLabel profitLabel;
     private JLabel distanceLabel;
+    private JLabel message;
 
     private String[] customerColNames = { "Customer Name", "Mobile Number", "Customer Type", "Location", "Distance" };
-    private Object[][] customerData;// = { { "", "", "", "", "" }, { "", "", "",
-                                    // "", "" }, { "", "", "", "", "" },
-    // { "", "", "", "", "" }, { "", "", "", "", "" }, { "", "", "", "", "" }, {
-    // "", "", "", "", "" },
-    // { "", "", "", "", "" }, { "", "", "", "", "" }, { "", "", "", "", "" }, {
-    // "", "", "", "", "" },
-    // { "", "", "", "", "" } };
+    private Object[][] customerData = new Object[ROW][COL];
 
     private String[] pizzaColNames = { "Pizza Type", "Quantity", "Order Price", "Order Cost", "Order Profit" };
-    private Object[][] pizzaData;// = { { "", "", "", "", "" }, { "", "", "",
-                                 // "", "" }, { "", "", "", "", "" },
-    // { "", "", "", "", "" }, { "", "", "", "", "" }, { "", "", "", "", "" }, {
-    // "", "", "", "", "" },
-    // { "", "", "", "", "" }, { "", "", "", "", "" }, { "", "", "", "", "" }, {
-    // "", "", "", "", "" },
-    // { "", "", "", "", "" } };
+    private Object[][] pizzaData = new Object[ROW][COL];
+
+    private BufferedReader input = null;
 
     /**
      * Creates a new Pizza GUI with the specified title
@@ -98,13 +97,35 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
     // -------------------------- event handlers --------------------------- //
     private void load() {
-        JOptionPane.showMessageDialog(null, "Load");
+        JButton open = new JButton();
+        final JFileChooser file = new JFileChooser();
+        file.setCurrentDirectory(new File("./logs"));
+        file.setFileFilter(new FileNameExtensionFilter("TEXT FILE", "txt"));
+        file.setDialogTitle("Select a file");
+        file.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        if (file.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
+            try {
+                input = new BufferedReader(new FileReader(file.getSelectedFile()));
+                message.setForeground(new Color(9, 140, 50));
+                message.setText("File was imported successfully!");
+                // test >>>>>>
+                profitLabel.setText(input.readLine().toString());
+                // test <<<<<<
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Opening file failed!");
+            }
+        } else {
+            // No file was selected
+        }
     }
 
     private void reset() {
-        customerData = createEmptyField();
-        pizzaData = createEmptyField();
-        JOptionPane.showMessageDialog(null, "Reset");
+        customerData = new Object[ROW][COL];
+        pizzaData = new Object[ROW][COL];
+        profitLabel.setText("Total profit for this day was: ");
+        distanceLabel.setText("Total distance travel for this day was: ");
+        message.setForeground(new Color(9, 140, 50));
+        message.setText("Application was successfully reset!");
     }
 
     private void calculateDistance() {
@@ -123,6 +144,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        setDefaultLookAndFeelDecorated(false);
 
         centrePanel = createPanel(Color.WHITE);
         topPanel = createPanel(Color.LIGHT_GRAY);
@@ -158,9 +180,22 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         pizzaTable = setCustomerTable(pizzaColNames, pizzaData);
         profitLabel = createLabel("Total profit for this day was: ");
         distanceLabel = createLabel("Total distance travel for this day was: ");
+        message = new JLabel();
+        message.setForeground(Color.blue);
+        message.setFont(new Font("Consolas", Font.BOLD, 14));
+        message.setText("No file has been selected!");
 
+        // Add titles
+        JLabel customerTitle = new JLabel("Customers info:");
+        JLabel pizzaTitle = new JLabel("Pizzas info:");
+
+        centrePanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        centrePanel.add(message);
+        centrePanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        centrePanel.add(customerTitle);
         centrePanel.add(customerScrollPane);
         centrePanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        centrePanel.add(pizzaTitle);
         centrePanel.add(pizzaTable);
         centrePanel.add(Box.createRigidArea(new Dimension(0, 10)));
         centrePanel.add(profitLabel);
