@@ -52,20 +52,20 @@ public class CustomerTests {
     // -------------------------- Test the objects ---------------------------//
     @Test
     public void testCustomerTypePickup() {
-        assertEquals(true, pickup instanceof PickUpCustomer);
-        assertEquals(true, pickup2 instanceof PickUpCustomer);
+        assertTrue(pickup instanceof PickUpCustomer);
+        assertTrue(pickup2 instanceof PickUpCustomer);
     }
 
     @Test
     public void testCustomerTypeDroneDelivery() {
-        assertEquals(true, droneDelivery instanceof DroneDeliveryCustomer);
-        assertEquals(true, droneDelivery2 instanceof DroneDeliveryCustomer);
+        assertTrue(droneDelivery instanceof DroneDeliveryCustomer);
+        assertTrue(droneDelivery2 instanceof DroneDeliveryCustomer);
     }
 
     @Test
     public void testCustomerTypeDriverDelivery() {
-        assertEquals(true, driverDelivery instanceof DriverDeliveryCustomer);
-        assertEquals(true, driverDelivery2 instanceof DriverDeliveryCustomer);
+        assertTrue(driverDelivery instanceof DriverDeliveryCustomer);
+        assertTrue(driverDelivery2 instanceof DriverDeliveryCustomer);
     }
 
     // -------------------------- test distance ---------------------------- //

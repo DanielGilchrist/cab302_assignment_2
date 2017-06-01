@@ -50,7 +50,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     private static final int COL = 5;
     private static final int ROW = 10;
     public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
+    public static final int HEIGHT = 600;
 
     private PizzaRestaurant restaurant;
 
@@ -64,6 +64,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     private JButton profitCalculator;
     private JButton distanceCalculator;
     private JButton reset;
+    private JButton loadCustomer;
+    private JButton loadPizza;
 
     private JScrollPane customerScrollPane;
     private JScrollPane pizzaTable;
@@ -136,6 +138,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         JOptionPane.showMessageDialog(null, "Calculate Profit");
     }
 
+    private void getCustomerData() {
+        JOptionPane.showMessageDialog(null, "Look at the customer table! ");
+    }
+
+    private void getPizzaData() {
+        JOptionPane.showMessageDialog(null, "Look at the Pizza table!");
+    }
+
     // -------------------------- event handlers --------------------------- //
     /*
      * Runs everything from the GUI here
@@ -175,6 +185,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      */
     private void layoutMiddleContents() {
         centrePanel.setLayout(new BoxLayout(centrePanel, BoxLayout.PAGE_AXIS));
+        JPanel centre = createPanel(Color.WHITE);
+        JPanel controls = createPanel(Color.WHITE);
+        centre.setLayout(new BoxLayout(centre, BoxLayout.PAGE_AXIS));
+        controls.setLayout(new BoxLayout(centre, BoxLayout.LINE_AXIS));
 
         customerScrollPane = setCustomerTable(customerColNames, customerData);
         pizzaTable = setCustomerTable(pizzaColNames, pizzaData);
@@ -183,23 +197,34 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         message = new JLabel();
         message.setForeground(Color.blue);
         message.setFont(new Font("Consolas", Font.BOLD, 14));
-        message.setText("No file has been selected!");
+        message.setText("Welcome");
 
         // Add titles
         JLabel customerTitle = new JLabel("Customers info:");
         JLabel pizzaTitle = new JLabel("Pizzas info:");
 
-        centrePanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        centrePanel.add(message);
-        centrePanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        centrePanel.add(customerTitle);
-        centrePanel.add(customerScrollPane);
-        centrePanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        centrePanel.add(pizzaTitle);
-        centrePanel.add(pizzaTable);
-        centrePanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        centrePanel.add(profitLabel);
-        centrePanel.add(distanceLabel);
+        loadCustomer = createButton("Analyse customer log");
+        loadPizza = createButton("Analyse pizza log");
+        controls.setLayout(new BorderLayout());
+        controls.add(loadCustomer, BorderLayout.EAST);
+        controls.add(loadPizza, BorderLayout.WEST);
+
+        centre.add(Box.createRigidArea(new Dimension(0, 5)));
+        centre.add(message);
+        centre.add(Box.createRigidArea(new Dimension(0, 5)));
+        centre.add(customerTitle);
+        centre.add(customerScrollPane);
+        centre.add(Box.createRigidArea(new Dimension(0, 5)));
+        centre.add(pizzaTitle);
+        centre.add(pizzaTable);
+        centre.add(Box.createRigidArea(new Dimension(0, 10)));
+        centre.add(profitLabel);
+        centre.add(distanceLabel);
+        centre.add(Box.createRigidArea(new Dimension(0, 5)));
+        centre.add(controls);
+
+        centrePanel.add(centre);
+        centrePanel.add(controls);
     }
 
     private JScrollPane setCustomerTable(String[] colName, Object[][] data) {
@@ -246,10 +271,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         constraints.weightx = 100;
         constraints.weighty = 100;
 
-        addToPanel(buttomPanel, load, constraints, 0, 0, 2, 1);
-        addToPanel(buttomPanel, profitCalculator, constraints, 3, 0, 2, 1);
-        addToPanel(buttomPanel, distanceCalculator, constraints, 5, 0, 2, 1);
-        addToPanel(buttomPanel, reset, constraints, 7, 0, 2, 1);
+        addToPanel(buttomPanel, load, constraints, 0, 2, 2, 1);
+        addToPanel(buttomPanel, profitCalculator, constraints, 3, 2, 2, 1);
+        addToPanel(buttomPanel, distanceCalculator, constraints, 5, 2, 2, 1);
+        addToPanel(buttomPanel, reset, constraints, 7, 2, 2, 1);
     }
 
     /**
@@ -301,6 +326,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
             calculateDistance();
         } else if (src == reset) {
             reset();
+        } else if (src == loadCustomer) {
+            getCustomerData();
+        } else if (src == loadPizza) {
+            getPizzaData();
         }
     }
 
