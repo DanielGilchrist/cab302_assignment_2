@@ -81,11 +81,11 @@ public abstract class Pizza {
     }
 
     private boolean isValidDeliveryTime(LocalTime deliveryTime) {
-        return deliveryTime.isAfter(OPENING_TIME);
+        return !deliveryTime.isBefore(OPENING_TIME);
     }
 
     private boolean isValidOrderTime(LocalTime orderTime) {
-        return (orderTime.isAfter(OPENING_TIME) && orderTime.isBefore(CLOSING_TIME));
+        return (!orderTime.isBefore(OPENING_TIME) && !orderTime.isAfter(CLOSING_TIME));
     }
 
     private boolean isValidQuantity(int quantity) {

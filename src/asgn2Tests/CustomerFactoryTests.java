@@ -317,6 +317,16 @@ public class CustomerFactoryTests {
         assertEquals(true, droneDelivery instanceof DroneDeliveryCustomer);
     }
 
+    @Test(expected = CustomerException.class)
+    public void testDroneLocation5() throws CustomerException {
+        Customer droneDelivery = CustomerFactory.getCustomer("DNC", "David Smith", "0123455555", 15, 13);
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testDroneWhenCustomerIsInRestaurant() throws CustomerException {
+        Customer droneDelivery = CustomerFactory.getCustomer("DNC", "David Smith", "0123455555", 0, 0);
+    }
+
     // ---------------------------- Driver Location --------------------------//
     @Test(expected = CustomerException.class)
     public void testDriveLocation1() throws CustomerException {
@@ -338,6 +348,11 @@ public class CustomerFactoryTests {
     public void testDriveLocation4() throws CustomerException {
         Customer driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "0123456666", 5, 10);
         assertEquals(true, driverDelivery instanceof DriverDeliveryCustomer);
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testDriveWhenCustomerIsInRestaurant() throws CustomerException {
+        Customer driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "0123456666", 0, 0);
     }
 
     // --------------------------------------------------------------------- //

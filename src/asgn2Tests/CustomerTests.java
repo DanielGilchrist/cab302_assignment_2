@@ -40,9 +40,9 @@ public class CustomerTests {
         pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0123456789", 0, 0);
         droneDelivery = CustomerFactory.getCustomer("DNC", "David Smith", "0123455555", 5, 5);
         driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "0123456666", 5, 5);
-        pickup2 = CustomerFactory.getCustomer("PUC", "John Smith 2nd", "0123456789", 0, 0);
-        droneDelivery2 = CustomerFactory.getCustomer("DNC", "David Smith 2nd", "0123455555", 3, 4);
-        driverDelivery2 = CustomerFactory.getCustomer("DVC", "Tom Smith 2nd", "0123456666", 2, 9);
+        pickup2 = CustomerFactory.getCustomer("PUC", "John Smith 2nd", "0123456788", 0, 0);
+        droneDelivery2 = CustomerFactory.getCustomer("DNC", "David Smith 2nd", "0123455550", 3, 4);
+        driverDelivery2 = CustomerFactory.getCustomer("DVC", "Tom Smith 2nd", "0123456660", 2, 9);
     }
 
     private static double calCulateEuclidianDistance(int x, int y) {
@@ -97,6 +97,94 @@ public class CustomerTests {
     @Test
     public void testDroneDeliveryDistance2nd() {
         assertTrue(droneDelivery2.getDeliveryDistance() == calCulateEuclidianDistance(3, 4));
+    }
+
+    // ------------------------ test customer name ------------------------- //
+    @Test
+    public void testGetCustomerNamePickup() {
+        assertTrue("John Smith".equals(pickup.getName()));
+        assertTrue("John Smith 2nd".equals(pickup2.getName()));
+    }
+
+    @Test
+    public void testGetCustomerNameDroneDelivery() {
+        assertTrue("David Smith".equals(droneDelivery.getName()));
+        assertTrue("David Smith 2nd".equals(droneDelivery2.getName()));
+    }
+
+    @Test
+    public void testGetCustomerNameDriverDelivery() {
+        assertTrue("Tom Smith".equals(driverDelivery.getName()));
+        assertTrue("Tom Smith 2nd".equals(driverDelivery2.getName()));
+    }
+
+    // ----------------- test customer mobile number ----------------------- //
+    @Test
+    public void testGetMobileNumberPickup() {
+        assertTrue("0123456789".equals(pickup.getMobileNumber()));
+        assertTrue("0123456788".equals(pickup2.getMobileNumber()));
+    }
+
+    @Test
+    public void testGetMobileNumberDroneDelivery() {
+        assertTrue("0123455555".equals(droneDelivery.getMobileNumber()));
+        assertTrue("0123455550".equals(droneDelivery2.getMobileNumber()));
+    }
+
+    @Test
+    public void testGetMobileNumberDriverDelivery() {
+        assertTrue("0123456666".equals(driverDelivery.getMobileNumber()));
+        assertTrue("0123456660".equals(driverDelivery2.getMobileNumber()));
+    }
+
+    // ------------------------ test customer type ------------------------- //
+    @Test
+    public void testCustomerTypes() throws CustomerException {
+        Customer pickup = CustomerFactory.getCustomer("PUC", "John Smith", "0123456789", 0, 0);
+        Customer droneDelivery = CustomerFactory.getCustomer("DNC", "David Smith", "0123455555", 5, 5);
+        Customer driverDelivery = CustomerFactory.getCustomer("DVC", "Tom Smith", "0123456666", 5, 5);
+
+        assertTrue("Pick Up".equals(pickup.getCustomerType()));
+        assertTrue("Drone Delivery".equals(droneDelivery.getCustomerType()));
+        assertTrue("Driver Delivery".equals(driverDelivery.getCustomerType()));
+    }
+
+    // -------------------- test customer location x ----------------------- //
+    @Test
+    public void testPickupCutomerLocationX() {
+        assertEquals(0, pickup.getLocationX());
+        assertEquals(0, pickup2.getLocationX());
+    }
+
+    @Test
+    public void testDroneDeliveryCutomerLocationX() {
+        assertEquals(5, droneDelivery.getLocationX());
+        assertEquals(3, droneDelivery2.getLocationX());
+    }
+
+    @Test
+    public void testDriverDeliveryCutomerLocationX() {
+        assertEquals(5, driverDelivery.getLocationX());
+        assertEquals(2, driverDelivery2.getLocationX());
+    }
+
+    // -------------------- test customer location y ----------------------- //
+    @Test
+    public void testPickupCutomerLocationY() {
+        assertEquals(0, pickup.getLocationY());
+        assertEquals(0, pickup2.getLocationY());
+    }
+
+    @Test
+    public void testDroneDeliveryCutomerLocationY() {
+        assertEquals(5, droneDelivery.getLocationY());
+        assertEquals(4, droneDelivery2.getLocationY());
+    }
+
+    @Test
+    public void testDriverDeliveryCutomerLocationY() {
+        assertEquals(5, driverDelivery.getLocationY());
+        assertEquals(9, driverDelivery2.getLocationY());
     }
 
 }
