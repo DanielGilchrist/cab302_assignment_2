@@ -57,19 +57,19 @@ public class PizzaFactoryTests {
 	@SuppressWarnings("unused")
 	@Test (expected = PizzaException.class)
 	public void testPizzaFactoryOrderTooEarly() throws PizzaException {
-		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(6, 0), DELIVERY_TIME);
+		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(18, 0), DELIVERY_TIME);
 	}
 	
 	@SuppressWarnings("unused")
 	@Test
 	public void testPizzaFactoryOrderOnOpeningTime() throws PizzaException {
-		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(7, 0), DELIVERY_TIME);
+		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(19, 0), DELIVERY_TIME);
 	}
 	
 	@SuppressWarnings("unused")
 	@Test
 	public void testPizzaFactoryOrderOnCloseTime() throws PizzaException {
-		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(11, 0), DELIVERY_TIME);
+		Pizza meatlovers = PizzaFactory.getPizza(pizzaCodes[0], QUANTITY, LocalTime.of(23, 0), DELIVERY_TIME);
 	}
 	
 	@SuppressWarnings("unused")
