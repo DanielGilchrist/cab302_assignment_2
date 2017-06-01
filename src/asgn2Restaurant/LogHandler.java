@@ -25,7 +25,9 @@ import asgn2Pizzas.PizzaFactory;
  *
  */
 public class LogHandler {
-
+	private static final int NUM_VALID_INPUT = 9;
+	
+	
     /**
      * Returns an ArrayList of Customer objects from the information contained
      * in the log file ordered as they appear in the log file.
@@ -126,9 +128,21 @@ public class LogHandler {
      *             - If there was a problem parsing the line from the log file.
      */
     public static Customer createCustomer(String line) throws CustomerException, LogHandlerException {
-        String[] words = line.split(",");
-        return CustomerFactory.getCustomer(words[4], words[2], words[3], 
-        		Integer.parseInt(words[5]), Integer.parseInt(words[6]));
+    	Customer customer;
+    	String[] words = line.split(",");
+        
+        if (words.length != NUM_VALID_INPUT) {
+        	throw new LogHandlerException("There was a problem parsing the line from the log file.");
+        }
+        
+        try {
+        	customer = CustomerFactory.getCustomer(words[4], words[2], words[3], 
+            		Integer.parseInt(words[5]), Integer.parseInt(words[6]));	
+        } catch (Exception e) {
+        	throw new CustomerException(e.toString());
+        }
+        
+        return customer;
     }
 
     /**
@@ -149,9 +163,21 @@ public class LogHandler {
      *             - If there was a problem parsing the line from the log file.
      */
     public static Pizza createPizza(String line) throws PizzaException, LogHandlerException {
-        String[] words = line.split(",");
-        return PizzaFactory.getPizza(words[7], Integer.parseInt(words[8]), 
-				LocalTime.parse(words[0]), LocalTime.parse(words[1]));
+        Pizza pizza;
+    	String[] words = line.split(",");
+        
+        if (words.length != NUM_VALID_INPUT) {
+        	throw new LogHandlerException("There was a problem parsing the line from the log file.");
+        }
+        
+        try {
+        	pizza = PizzaFactory.getPizza(words[7], Integer.parseInt(words[8]), 
+    				LocalTime.parse(words[0]), LocalTime.parse(words[1]));
+        } catch (Exception e) {
+        	throw new PizzaException(e.toString());
+        }
+        
+        return pizza;
     }
 
 }
