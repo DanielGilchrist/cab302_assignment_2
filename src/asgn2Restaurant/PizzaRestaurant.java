@@ -89,7 +89,7 @@ public class PizzaRestaurant {
 		if (index >= 0 && index < pizzas.size()) {
 			return pizzas.get(index);
 		} else {
-			throw new PizzaException("Invalid index for customers.");
+			throw new PizzaException("Invalid index for pizzas.");
 		}
 	}
 	
