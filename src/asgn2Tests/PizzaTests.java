@@ -23,6 +23,7 @@ import asgn2Pizzas.VegetarianPizza;
  * @author Person B
  *
  */
+@SuppressWarnings("unused")
 public class PizzaTests {
 	private static final int QUANTITY = 3;
 	private static final LocalTime ORDER_TIME = LocalTime.of(20, 0);
