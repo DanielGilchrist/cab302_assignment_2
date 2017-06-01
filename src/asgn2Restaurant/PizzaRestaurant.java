@@ -1,21 +1,11 @@
 package asgn2Restaurant;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import asgn2Customers.Customer;
-import asgn2Customers.CustomerFactory;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
-import asgn2Pizzas.PizzaFactory;
 
 /**
  * This class acts as a ‘model’ of a pizza restaurant. It contains an ArrayList of Pizza objects and an ArrayList of  Customer objects.
