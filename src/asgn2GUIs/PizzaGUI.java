@@ -53,6 +53,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     private static final int ROW = 10;
     public static final int WIDTH = 500;
     public static final int HEIGHT = 600;
+    private boolean logFileLoaded;
 
     private PizzaRestaurant restaurant;
 
@@ -100,6 +101,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     public PizzaGUI(String title) {
         super(title);
         restaurant = new PizzaRestaurant();
+        logFileLoaded = false;
     }
 
     @Override
@@ -117,12 +119,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         file.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         if (file.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
             try {
+            	reset();
+            	
                 restaurant.processLog(file.getSelectedFile().toString());
 
                 message.setForeground(new Color(9, 140, 50));
                 message.setText("File was imported successfully!");
+                
+                logFileLoaded = true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.toString()/* "Opening file failed!" */);
+                JOptionPane.showMessageDialog(null, "Failed to open log file please try again");
             }
         } else {
             // No file was selected
@@ -130,7 +136,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     private void reset() {
-
         tableModel1.setRowCount(0);
         tableModel2.setRowCount(0);
         restaurant.resetDetails();
@@ -138,10 +143,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         distanceLabel.setText("Total distance travel for this day was: ");
         message.setForeground(new Color(9, 140, 50));
         message.setText("Application was successfully reset!");
+        logFileLoaded = false;
     }
 
     private void calculateDistance() {
-        JOptionPane.showMessageDialog(null, "Calculate Distance");
+        JOptionPane.showMessageDialog(null, restaurant.getTotalDeliveryDistance());
     }
 
     private void calculateProfit() {
@@ -166,7 +172,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 tableModel1.addRow(row);
             }
         }
-
     }
 
     private void getPizzaData() throws PizzaException {
@@ -377,27 +382,54 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     @Override
     public void actionPerformed(ActionEvent event) {
         Object src = event.getSource();
-        if (src == load) {
+        /*if (src == load) {
             load();
         } else if (src == profitCalculator) {
-            calculateProfit();
+        	if (logFileLoaded) {
+        		calculateProfit();	
+        	}
         } else if (src == distanceCalculator) {
-            calculateDistance();
+        	if (logFileLoaded) {
+        		calculateDistance();
+        	}
         } else if (src == reset) {
-            reset();
+        	if (logFileLoaded) {
+        		reset();	
+        	}
         } else if (src == loadCustomer) {
-            try {
-                getCustomerData();
-            } catch (CustomerException e) {
-                JOptionPane.showMessageDialog(null, e.toString());
-            }
+        	if (logFileLoaded)
+            getCustomerData();
+            JOptionPane.showMessageDialog(null, "Customers weren't loaded correctly please try loading the log file again");
         } else if (src == loadPizza) {
             try {
                 getPizzaData();
             } catch (PizzaException e) {
-                JOptionPane.showMessageDialog(null, e.toString());
+                JOptionPane.showMessageDialog(null, "Pizzas weren't loaded correctly please try loading the log file again");
+            }
+        }*/
+        
+        if (src == load) {
+        	load();
+        } else if (logFileLoaded) {
+        	if (src == profitCalculator) {
+            	calculateProfit();
+            } else if (src == distanceCalculator) {
+            	calculateDistance();
+            } else if (src == reset) {
+            	reset();
+            } else if (src == loadCustomer) {
+                try {
+					getCustomerData();
+				} catch (CustomerException e) {
+					JOptionPane.showMessageDialog(null, "Customers weren't loaded correctly please try loading the log file again");
+				}
+            } else if (src == loadPizza) {
+                try {
+                	getPizzaData();
+				} catch (PizzaException e) {
+					JOptionPane.showMessageDialog(null, "Pizzas weren't loaded correctly please try loading the log file again");
+				}
             }
         }
     }
-
 }
