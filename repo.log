@@ -1,3 +1,9 @@
+* 55be25c : Fixed comments
+*   0f32e16 : Final stuff
+|\  
+| * 999db1b : GUI final touches - fixed the message label
+* | 433a623 : Fixed some minor things
+|/  
 *   daed208 : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
 |\  
 | *   b3ce7db : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
@@ -84,7 +90,32 @@
 * | 1411f3b : Committing so I can continue working on desktop
 |/  
 * d98a34c : Initial commit with assignment template
-* bf19534 : Initial commitcommit daed208e4907b966e040a614e09776fd14c23565
+* bf19534 : Initial commitcommit 55be25c809aefb5f9da5f8f76375e46ad5ff597f
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 23:30:14 2017 +1000
+
+    Fixed comments
+
+commit 0f32e1697e9ad009f5b44ec63624aff145aa1c2c
+Merge: 433a623 999db1b
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 23:26:47 2017 +1000
+
+    Final stuff
+
+commit 999db1b2cb3991c55ef400c2ca512655c58a08d3
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 23:25:12 2017 +1000
+
+    GUI final touches - fixed the message label
+
+commit 433a623783a16a67f42526960a72a32ed8f619b9
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 23:23:08 2017 +1000
+
+    Fixed some minor things
+
+commit daed208e4907b966e040a614e09776fd14c23565
 Merge: fddd01c b3ce7db
 Author: MxtfV <mustafa.logan@outlook.com.au>
 Date:   Fri Jun 2 23:02:19 2017 +1000
