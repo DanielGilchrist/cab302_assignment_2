@@ -160,7 +160,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
             tableModel1.addRow(row);
         }
 
-        customerScrollPane = setCustomerTable(customerColNames, customerData);
     }
 
     private void getPizzaData() throws PizzaException {
@@ -177,7 +176,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
             tableModel2.addRow(row);
         }
 
-        pizzaTable = setCustomerTable(pizzaColNames, pizzaData);
     }
 
     // -------------------------- event handlers --------------------------- //
