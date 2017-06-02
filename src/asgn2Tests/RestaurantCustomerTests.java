@@ -19,6 +19,7 @@ import asgn2Restaurant.PizzaRestaurant;
  * @author Person A
  */
 public class RestaurantCustomerTests {
+	private static final String FILE_PATH = "./testFiles/";
 	private static final String VALID_CSV_NAME = "test_valid_order.txt";
 	private PizzaRestaurant pr;
 	private Customer customer1;
@@ -37,54 +38,54 @@ public class RestaurantCustomerTests {
 	
 	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidCustomerCode() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_cust_code.txt");
+		pr.processLog(FILE_PATH + "test_invalid_cust_code.txt");
 	}
 	
 	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidName() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_name.txt");
+		pr.processLog(FILE_PATH + "test_invalid_name.txt");
 	}
 	
 	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidMobileNumber() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_mobile_number.txt");
+		pr.processLog(FILE_PATH + "test_invalid_mobile_number.txt");
 	}
 	
 	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidLocationX() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_location_x.txt");
+		pr.processLog(FILE_PATH + "test_invalid_location_x.txt");
 	}
 	
 	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidLocationY() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_location_y.txt");
+		pr.processLog(FILE_PATH + "test_invalid_location_y.txt");
 	}
 	
 	@Test (expected = CustomerException.class)
 	public void testProcessLogBlankCustomerInformation() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_blank_cust_info.txt");
+		pr.processLog(FILE_PATH + "test_blank_cust_info.txt");
 	}
 	
 	// doesn't matter which test file the next two tests are in as they aren't
 	// particularly relevant to either customers or pizza
 	@Test (expected = LogHandlerException.class)
 	public void testProcessLogNotCSVFormat() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_not_CSV.txt");
+		pr.processLog(FILE_PATH + "test_not_CSV.txt");
 	}
 	
 	@Test (expected = LogHandlerException.class)
 	public void testProcessLogEmptyFile() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_empty.txt");
+		pr.processLog(FILE_PATH + "test_empty.txt");
 	}
 	
 	@Test (expected = LogHandlerException.class)
 	public void testProcessLogMissingCustomerInformation() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_missing_cust_info.txt");
+		pr.processLog(FILE_PATH + "test_missing_cust_info.txt");
 	}
 	
 	@Test
 	public void testGetCustomerByIndex() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		assertEquals(customer1, pr.getCustomerByIndex(0));
 	}
 	
@@ -98,7 +99,7 @@ public class RestaurantCustomerTests {
 	@Test
 	(expected = CustomerException.class)
 	public void testGetCustomerByIndexIndexTooHigh() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		pr.getCustomerByIndex(4);
 	}
 	
@@ -109,7 +110,7 @@ public class RestaurantCustomerTests {
 	
 	@Test
 	public void testGetNumCustomerOrders() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		assertEquals(3, pr.getNumCustomerOrders());
 	}
 	
@@ -124,14 +125,14 @@ public class RestaurantCustomerTests {
 							  customer2.getDeliveryDistance() + 
 							  customer3.getDeliveryDistance();
 		
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		
 		assertEquals(expectedDist, pr.getTotalDeliveryDistance(), 0);
 	}
 	
 	@Test
 	public void testResetDetailsCustomersReset() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		assertEquals(3, pr.getNumCustomerOrders());
 		pr.resetDetails();
 		assertEquals(0, pr.getNumCustomerOrders());

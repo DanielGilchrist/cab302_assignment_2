@@ -22,6 +22,7 @@ import asgn2Restaurant.PizzaRestaurant;
  *
  */
 public class RestaurantPizzaTests {
+	private static final String FILE_PATH = "./testFiles/";
 	private static final String VALID_CSV_NAME = "test_valid_order.txt";
 	private PizzaRestaurant pr;
 	private Pizza pizza1;
@@ -41,42 +42,42 @@ public class RestaurantPizzaTests {
 	@Test
 	(expected = PizzaException.class)
 	public void testProcessLogInvalidPizzaCode() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_pizza_code.txt");
+		pr.processLog(FILE_PATH + "test_invalid_pizza_code.txt");
 	}
 	
 	@Test
 	(expected = PizzaException.class)
 	public void testProcessLogInvalidQuantity() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_quantity.txt");
+		pr.processLog(FILE_PATH + "test_invalid_quantity.txt");
 	}
 	
 	@Test
 	(expected = PizzaException.class)
 	public void testProcessLogInvalidOrderTime() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_order_time.txt");
+		pr.processLog(FILE_PATH + "test_invalid_order_time.txt");
 	}
 	
 	@Test
 	(expected = PizzaException.class)
 	public void testProcessLogInvalidDeliveryTime() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_invalid_delivery_time.txt");
+		pr.processLog(FILE_PATH + "test_invalid_delivery_time.txt");
 	}
 	
 	@Test
 	(expected = PizzaException.class)
 	public void testProcessLogBlankPizzaInformation() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_blank_pizza_info.txt");
+		pr.processLog(FILE_PATH + "test_blank_pizza_info.txt");
 	}
 	
 	@Test
 	(expected = LogHandlerException.class)
 	public void testProcessLogMissingPizzaInformation() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog("test_missing_pizza_info.txt");
+		pr.processLog(FILE_PATH + "test_missing_pizza_info.txt");
 	}
 	
 	@Test
 	public void testGetPizzaByIndex() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		assertEquals(pizza1, pr.getPizzaByIndex(0));
 	}
 	
@@ -90,7 +91,7 @@ public class RestaurantPizzaTests {
 	@Test
 	(expected = PizzaException.class)
 	public void testGetPizzaByIndexIndexTooHigh() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		pr.getPizzaByIndex(4);
 	}
 	
@@ -101,7 +102,7 @@ public class RestaurantPizzaTests {
 	
 	@Test
 	public void testGetNumPizzaOrders() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		assertEquals(3, pr.getNumPizzaOrders());
 	}
 	
@@ -120,13 +121,13 @@ public class RestaurantPizzaTests {
 								pizza2.getOrderProfit() +
 								pizza3.getOrderProfit();
 		
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		assertEquals(expectedProfit, pr.getTotalProfit(), 0);
 	}
 	
 	@Test
 	public void testResetDetailsPizzaReset() throws CustomerException, PizzaException, LogHandlerException {
-		pr.processLog(VALID_CSV_NAME);
+		pr.processLog(FILE_PATH + VALID_CSV_NAME);
 		assertEquals(3, pr.getNumPizzaOrders());
 		pr.resetDetails();
 		assertEquals(0, pr.getNumPizzaOrders());
