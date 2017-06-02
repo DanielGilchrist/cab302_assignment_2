@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -77,11 +75,19 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     private JLabel distanceLabel;
     private JLabel message;
 
+    private JTable customerDataTable;
+    private JTable pizzaDataTable;
+
+    private DefaultTableModel tableModel1;
+    private DefaultTableModel tableModel2;
+
+    private JFileChooser file = null;
+
     private String[] customerColNames = { "Customer Name", "Mobile Number", "Customer Type", "Location", "Distance" };
-    private Object[][] customerData = new Object[ROW][COL];
+    private Object[][] customerData; // = new Object[ROW][COL];
 
     private String[] pizzaColNames = { "Pizza Type", "Quantity", "Order Price", "Order Cost", "Order Profit" };
-    private Object[][] pizzaData = new Object[ROW][COL];
+    private Object[][] pizzaData; // = new Object[ROW][COL];
 
     private BufferedReader input = null;
 
@@ -104,7 +110,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     // -------------------------- event handlers --------------------------- //
     private void load() {
         JButton open = new JButton();
-        final JFileChooser file = new JFileChooser();
+        file = new JFileChooser();
         file.setCurrentDirectory(new File("./logs"));
         file.setFileFilter(new FileNameExtensionFilter("TEXT FILE", "txt"));
         file.setDialogTitle("Select a file");
@@ -112,11 +118,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         if (file.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
             try {
                 restaurant.processLog(file.getSelectedFile().toString());
-                
+
                 message.setForeground(new Color(9, 140, 50));
                 message.setText("File was imported successfully!");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.toString()/*"Opening file failed!"*/);
+                JOptionPane.showMessageDialog(null, e.toString()/* "Opening file failed!" */);
             }
         } else {
             // No file was selected
@@ -124,8 +130,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     private void reset() {
-        customerData = new Object[ROW][COL];
-        pizzaData = new Object[ROW][COL];
+
+        tableModel1.setRowCount(0);
+        tableModel2.setRowCount(0);
         profitLabel.setText("Total profit for this day was: ");
         distanceLabel.setText("Total distance travel for this day was: ");
         message.setForeground(new Color(9, 140, 50));
@@ -141,32 +148,36 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     private void getCustomerData() throws CustomerException {
-    	for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
-        	Customer customer = restaurant.getCustomerByIndex(i);
-        	
-        	customerData[i][0] = customer.getName();
-        	customerData[i][1] = customer.getMobileNumber();
-        	customerData[i][2] = customer.getCustomerType();
-        	customerData[i][3] = String.format("(%d, %d)", 
-        			customer.getLocationX(), customer.getLocationY());
-        	customerData[i][4] = customer.getDeliveryDistance();
+        for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
+            Customer customer = restaurant.getCustomerByIndex(i);
+
+            String name = customer.getName();
+            String mobileNumber = customer.getMobileNumber();
+            String type = customer.getCustomerType();
+            String location = String.format("(%d, %d)", customer.getLocationX(), customer.getLocationY());
+            double distance = customer.getDeliveryDistance();
+            Object[] row = { name, mobileNumber, type, location, Double.toString(distance) };
+            tableModel1.addRow(row);
         }
-    	
-    	customerScrollPane = setCustomerTable(customerColNames, customerData);
+
+        customerScrollPane = setCustomerTable(customerColNames, customerData);
     }
 
     private void getPizzaData() throws PizzaException {
-    	for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
-        	Pizza pizza = restaurant.getPizzaByIndex(i);
-        	
-        	pizzaData[i][0] = pizza.getPizzaType();
-        	pizzaData[i][1] = pizza.getQuantity();
-        	pizzaData[i][2] = pizza.getOrderPrice();
-        	pizzaData[i][3] = pizza.getOrderCost();
-        	pizzaData[i][4] = pizza.getOrderProfit();
+        for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
+            Pizza pizza = restaurant.getPizzaByIndex(i);
+
+            String type = pizza.getPizzaType();
+            int quantity = pizza.getQuantity();
+            double price = pizza.getOrderPrice();
+            double cost = pizza.getOrderCost();
+            double profit = pizza.getOrderProfit();
+            Object[] row = { type, Integer.toString(quantity), Double.toString(price), Double.toString(cost),
+                    Double.toString(profit) };
+            tableModel2.addRow(row);
         }
-    	
-    	pizzaTable = setCustomerTable(pizzaColNames, pizzaData);
+
+        pizzaTable = setCustomerTable(pizzaColNames, pizzaData);
     }
 
     // -------------------------- event handlers --------------------------- //
@@ -214,7 +225,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         controls.setLayout(new BoxLayout(centre, BoxLayout.LINE_AXIS));
 
         customerScrollPane = setCustomerTable(customerColNames, customerData);
-        pizzaTable = setCustomerTable(pizzaColNames, pizzaData);
+        pizzaTable = setPizzaTable(pizzaColNames, pizzaData);
         profitLabel = createLabel("Total profit for this day was: ");
         distanceLabel = createLabel("Total distance travel for this day was: ");
         message = new JLabel();
@@ -251,17 +262,32 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     private JScrollPane setCustomerTable(String[] colName, Object[][] data) {
-        DefaultTableModel tableModel = new DefaultTableModel(data, colName) {
+        tableModel1 = new DefaultTableModel(data, colName) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        JTable tb = new JTable(data, colName);
-        tb.setModel(tableModel);
-        JScrollPane scrollPane = new JScrollPane(tb);
-        tb.setFillsViewportHeight(true);
+        customerDataTable = new JTable(tableModel1);
+        // customerDataTable.setModel(tableModel);
+        JScrollPane scrollPane = new JScrollPane(customerDataTable);
+        customerDataTable.setFillsViewportHeight(true);
+        return scrollPane;
+    }
+
+    private JScrollPane setPizzaTable(String[] colName, Object[][] data) {
+        tableModel2 = new DefaultTableModel(data, colName) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        pizzaDataTable = new JTable(tableModel2);
+        // pizzaDataTable.setModel(tableModel);
+        JScrollPane scrollPane = new JScrollPane(pizzaDataTable);
+        pizzaDataTable.setFillsViewportHeight(true);
         return scrollPane;
     }
 
@@ -351,16 +377,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
             reset();
         } else if (src == loadCustomer) {
             try {
-				getCustomerData();
-			} catch (CustomerException e) {
-				JOptionPane.showMessageDialog(null, e.toString());
-			}
+                getCustomerData();
+            } catch (CustomerException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         } else if (src == loadPizza) {
             try {
-				getPizzaData();
-			} catch (PizzaException e) {
-				JOptionPane.showMessageDialog(null, e.toString());
-			}
+                getPizzaData();
+            } catch (PizzaException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
         }
     }
 
