@@ -15,17 +15,15 @@ import asgn2Exceptions.PizzaException;
  * and their constraints is provided in Section 5.1 of the Assignment
  * Specification.
  * 
- * @author Person A
+ * @author Mustafa Hussaini
  *
  */
 public class MargheritaPizza extends Pizza {
 
     private static final double MARGHERITA_PRICE = 8.0;
-    
-    private final ArrayList<PizzaTopping> pizzaTopping = new ArrayList<PizzaTopping>(Arrays.asList(
-		PizzaTopping.TOMATO,
-		PizzaTopping.CHEESE
-    ));
+
+    private final ArrayList<PizzaTopping> pizzaTopping = new ArrayList<PizzaTopping>(
+            Arrays.asList(PizzaTopping.TOMATO, PizzaTopping.CHEESE));
 
     /**
      * 
@@ -50,7 +48,12 @@ public class MargheritaPizza extends Pizza {
      * @param deliveryTime
      *            - The time that the pizza was delivered to the customer
      * @throws PizzaException
-     *             if supplied parameters are invalid
+     *             if quantity is 0, negative or greater than 10, if orderTime
+     *             is before 7pm, or after 11pm, and/or if delivery time is
+     *             before the order time, or before the opening time, and/or if
+     *             delivery time is less than 10 minutes after the order time,
+     *             and/or if delivery time is greater than 1 hour after the
+     *             order time
      *
      */
     public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {

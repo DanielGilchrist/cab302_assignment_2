@@ -57,7 +57,12 @@ public abstract class Pizza {
      * @param price
      *            - The price that the pizza is sold to the customer
      * @throws PizzaException
-     *             if supplied parameters are invalid
+     *             if quantity is 0, negative or greater than 10, and/or if
+     *             orderTime is before 7pm, or after 11pm, and/ orif delivery
+     *             time is before the order time, or before the opening time,
+     *             and/or if delivery time is less than 10 minutes after the
+     *             order time, and/or if delivery time is greater than 1 hour
+     *             after the order time
      * 
      */
     public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price)
@@ -98,8 +103,7 @@ public abstract class Pizza {
     }
 
     /**
-     * Calculates how much a pizza would could to make calculated from its
-     * toppings.
+     * Calculates how much a pizza would be by calculating its toppings.
      * 
      * <P>
      * PRE: TRUE
@@ -195,7 +199,8 @@ public abstract class Pizza {
      * Returns a human understandable description of the Pizza's type. The valid
      * alternatives are listed in Section 5.1 of the Assignment Specification.
      * 
-     * @return A human understandable description of the Pizza's type.
+     * @return A human understandable description of the Pizza's type
+     *         Margherita, Meat Lovers, or Vegetarian.
      */
     public final String getPizzaType() {
         return this.type;

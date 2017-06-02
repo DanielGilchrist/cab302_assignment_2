@@ -45,15 +45,15 @@ import asgn2Restaurant.PizzaRestaurant;
  * use this class and asgn2Wizards.PizzaWizard to test your system as a whole
  * 
  * 
- * @author Person A and Person B
+ * @author Mustafa Hussaini and Daniel Gilchrist
  *
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
 
     private static final int COL = 5;
     private static final int ROW = 10;
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 800;
     private boolean logFileLoaded;
 
     private PizzaRestaurant restaurant;
@@ -73,8 +73,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
     private JScrollPane customerScrollPane;
     private JScrollPane pizzaTable;
-    private JLabel profitLabel;
-    private JLabel distanceLabel;
     private JLabel message;
 
     private JTable customerDataTable;
@@ -86,10 +84,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     private JFileChooser file = null;
 
     private String[] customerColNames = { "Customer Name", "Mobile Number", "Customer Type", "Location", "Distance" };
-    private Object[][] customerData; // = new Object[ROW][COL];
-
     private String[] pizzaColNames = { "Pizza Type", "Quantity", "Order Price", "Order Cost", "Order Profit" };
-    private Object[][] pizzaData; // = new Object[ROW][COL];
+    private Object[][] customerData;
+    private Object[][] pizzaData;
 
     private BufferedReader input = null;
 
@@ -110,7 +107,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         RunGUI();
     }
 
-    // -------------------------- event handlers --------------------------- //
+    // ------------------------- Action listeners -------------------------- //
+    /*
+     * A method that would perform if the Load button is pressed.
+     */
     private void load() {
         JButton open = new JButton();
         file = new JFileChooser();
@@ -120,45 +120,58 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         file.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         if (file.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
             try {
-            	reset();
-            	
+                reset();
+
                 restaurant.processLog(file.getSelectedFile().toString());
 
                 message.setForeground(new Color(9, 140, 50));
                 message.setText("File was imported successfully!");
-                
+
                 logFileLoaded = true;
             } catch (PizzaException e) {
                 JOptionPane.showMessageDialog(null, "Incorrect pizza details in log file.");
             } catch (CustomerException e) {
-            	JOptionPane.showMessageDialog(null, "Incorrect customer details in log file.");
+                JOptionPane.showMessageDialog(null, "Incorrect customer details in log file.");
             } catch (LogHandlerException e) {
-            	JOptionPane.showMessageDialog(null, "Failed to open log file. Check that there are no formatting errors and try again.");
+                JOptionPane.showMessageDialog(null,
+                        "Failed to open log file. Check that there are no formatting errors and try again.");
             }
         } else {
             // No file was selected
         }
     }
 
+    /*
+     * A method that will perform when the reset button is pressed.
+     */
     private void reset() {
         tableModel1.setRowCount(0);
         tableModel2.setRowCount(0);
         restaurant.resetDetails();
-        profitLabel.setText("Total profit for this day was: ");
-        distanceLabel.setText("Total distance travel for this day was: ");
         message.setForeground(new Color(9, 140, 50));
-        message.setText("Application was successfully reset!");
         logFileLoaded = false;
+        message.setText("Application was successfully reset!");
     }
 
+    /*
+     * A method that displays the total distance traveled
+     */
     private void calculateDistance() {
-        JOptionPane.showMessageDialog(null, String.format("Distance travelled for today is %.2f blocks", restaurant.getTotalDeliveryDistance()));
+        JOptionPane.showMessageDialog(null,
+                String.format("Distance travelled for today is %.2f blocks", restaurant.getTotalDeliveryDistance()));
     }
 
+    /*
+     * A method that displays the total profit made on the particular date
+     */
     private void calculateProfit() {
-        JOptionPane.showMessageDialog(null, String.format("Total profit for today is $%.2f", restaurant.getTotalProfit()));
+        JOptionPane.showMessageDialog(null,
+                String.format("Total profit for today is $%.2f", restaurant.getTotalProfit()));
     }
 
+    /*
+     * A method that displays the data onto the customers table
+     */
     private void getCustomerData() throws CustomerException {
         // tries to access tableModel1 if exception is thrown that means data
         // can be added since there's nothing there otherwise does nothing
@@ -179,6 +192,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         }
     }
 
+    /*
+     * A method that displays data onto the pizza table
+     */
     private void getPizzaData() throws PizzaException {
         // tries to access tableModel2 if exception is thrown that means data
         // can be added since there's nothing there otherwise does nothing
@@ -200,7 +216,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         }
     }
 
-    // -------------------------- event handlers --------------------------- //
+    // ----------------------- end event handlers -------------------------- //
+
     /*
      * Runs everything from the GUI here
      */
@@ -246,8 +263,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
         customerScrollPane = setCustomerTable(customerColNames, customerData);
         pizzaTable = setPizzaTable(pizzaColNames, pizzaData);
-        profitLabel = createLabel("Total profit for this day was: ");
-        distanceLabel = createLabel("Total distance travel for this day was: ");
         message = new JLabel();
         message.setForeground(Color.blue);
         message.setFont(new Font("Consolas", Font.BOLD, 14));
@@ -260,8 +275,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         loadCustomer = createButton("Analyse customer log");
         loadPizza = createButton("Analyse pizza log");
         controls.setLayout(new BorderLayout());
-        controls.add(loadCustomer, BorderLayout.EAST);
-        controls.add(loadPizza, BorderLayout.WEST);
+        controls.add(loadCustomer, BorderLayout.WEST);
+        controls.add(loadPizza, BorderLayout.EAST);
 
         centre.add(Box.createRigidArea(new Dimension(0, 5)));
         centre.add(message);
@@ -272,8 +287,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         centre.add(pizzaTitle);
         centre.add(pizzaTable);
         centre.add(Box.createRigidArea(new Dimension(0, 10)));
-        centre.add(profitLabel);
-        centre.add(distanceLabel);
         centre.add(Box.createRigidArea(new Dimension(0, 5)));
         centre.add(controls);
 
@@ -281,6 +294,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         centrePanel.add(controls);
     }
 
+    /*
+     * Constructs the customer table in a Scroll pane
+     */
     private JScrollPane setCustomerTable(String[] colName, Object[][] data) {
         tableModel1 = new DefaultTableModel(data, colName) {
             @Override
@@ -290,12 +306,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         };
 
         customerDataTable = new JTable(tableModel1);
-        // customerDataTable.setModel(tableModel);
+        customerDataTable.setFont(new Font("Comic Sans", Font.PLAIN, 13));
         JScrollPane scrollPane = new JScrollPane(customerDataTable);
         customerDataTable.setFillsViewportHeight(true);
         return scrollPane;
     }
 
+    /*
+     * Constructs the pizza table in a Scroll pane
+     */
     private JScrollPane setPizzaTable(String[] colName, Object[][] data) {
         tableModel2 = new DefaultTableModel(data, colName) {
             @Override
@@ -305,32 +324,35 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         };
 
         pizzaDataTable = new JTable(tableModel2);
-        // pizzaDataTable.setModel(tableModel);
+        pizzaDataTable.setFont(new Font("Comic Sans", Font.PLAIN, 13));
         JScrollPane scrollPane = new JScrollPane(pizzaDataTable);
         pizzaDataTable.setFillsViewportHeight(true);
         return scrollPane;
     }
 
-    private JLabel createLabel(String s) {
-        JLabel lb = new JLabel();
-        lb.setText(s);
-        lb.setFont(new Font("Consolas", Font.PLAIN, 13));
-        return lb;
-    }
-
+    /*
+     * Constructs buttons
+     */
     private JButton createButton(String str) {
         JButton btn = new JButton();
         btn.setText(str);
+        btn.setFont(new Font("Comic Sans", Font.PLAIN, 16));
         btn.addActionListener(this);
         return btn;
     }
 
+    /*
+     * Constructs panels
+     */
     private JPanel createPanel(Color c) {
         JPanel panel = new JPanel();
         panel.setBackground(c);
         return panel;
     }
 
+    /*
+     * Places the button in the buttom panel
+     */
     private void layoutButtonPanel() {
         GridBagLayout layout = new GridBagLayout();
         buttomPanel.setLayout(layout);
@@ -372,43 +394,39 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         jPanel.add(c, constraints);
     }
 
-    private Object[][] createEmptyField() {
-        final int rows = 10;
-        final int cols = 5;
-        Object[][] obj = new Object[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                obj[i][j] = "";
-            }
-        }
-        return obj;
-    }
-
+    /*
+     * Action listener (non-Javadoc)
+     * 
+     * @see
+     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
         Object src = event.getSource();
-        
+
         if (src == load) {
-        	load();
+            load();
         } else if (logFileLoaded) {
-        	if (src == profitCalculator) {
-            	calculateProfit();
+            if (src == profitCalculator) {
+                calculateProfit();
             } else if (src == distanceCalculator) {
-            	calculateDistance();
+                calculateDistance();
             } else if (src == reset) {
-            	reset();
+                reset();
             } else if (src == loadCustomer) {
                 try {
-					getCustomerData();
-				} catch (CustomerException e) {
-					JOptionPane.showMessageDialog(null, "Customers weren't loaded correctly please try loading the log file again.");
-				}
+                    getCustomerData();
+                } catch (CustomerException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Customers weren't loaded correctly please try loading the log file again.");
+                }
             } else if (src == loadPizza) {
                 try {
-                	getPizzaData();
-				} catch (PizzaException e) {
-					JOptionPane.showMessageDialog(null, "Pizzas weren't loaded correctly please try loading the log file again.");
-				}
+                    getPizzaData();
+                } catch (PizzaException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Pizzas weren't loaded correctly please try loading the log file again.");
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ import asgn2Exceptions.PizzaException;
  * valid pizza codes outlined in Section 5.3 of the Assignment Specification.
  * Any other code will throw a PizzaException.
  * 
- * @author Person A
+ * @author Mustafa Hussaini
  *
  */
 
@@ -36,8 +36,8 @@ public class PizzaFactory {
      * @param deliveryTime
      *            - The time that the pizza was delivered to the customer
      * @throws PizzaException
-     *             if the pizzaCode is not one of the three valid codes listed
-     *             in Section 5.3 of the Assignment Specification.
+     *             if the pizzaCode is not one of the three valid codes {"PZV",
+     *             "PZM", "PZL"}
      * @return A valid Pizza object using the specified parameters
      */
     public static Pizza getPizza(String pizzaCode, int quantity, LocalTime orderTime, LocalTime deliveryTime)
