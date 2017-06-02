@@ -21,10 +21,10 @@ import asgn2Exceptions.CustomerException;
  * should be used to test the functionality of the asgn2Customers.Customer
  * abstract class.
  * 
- * @author Person A
+ * @author Mustafa Hussaini
  * 
- *
  */
+
 public class CustomerTests {
     // private vairables
     Customer pickup;

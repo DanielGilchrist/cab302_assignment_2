@@ -16,7 +16,7 @@ import asgn2Exceptions.CustomerException;
 /**
  * A class the that tests the asgn2Customers.CustomerFactory class.
  * 
- * @author Person A
+ * @author Mustafa Hussaini
  *
  */
 

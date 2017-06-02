@@ -8,7 +8,7 @@ import asgn2Exceptions.CustomerException;
  *  the abstract method getDeliveryDistance. A description of the class's
  * fields and their constraints is provided in Section 5.2 of the Assignment Specification.  
  * 
- * @author Person B
+ * @author Daniel Gilchrist
 */
 public abstract class Customer {
 	private String name;
@@ -35,18 +35,21 @@ public abstract class Customer {
 	 * 
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException {
+		// check if name is valid
 		if (name.length() >= 1 && name.length() <= 20 && name.trim().length() > 0) {
 			this.name = name;
 		} else {
 			throw new CustomerException("Customer name is invalid. (Length must be between 1 and 20 (inclusive) and cannot be only whitespaces");
 		}
 		
+		// check if mobile number is valid
 		if (mobileNumber.length() == 10 && mobileNumber.charAt(0) == '0') {
 			this.mobileNumber = mobileNumber;
 		} else {
 			throw new CustomerException("Mobile number is invalid. (Length must be 10 and must begin with 0)");
 		}
 		
+		// check that location is valid
 		if (locationX > 10 || locationX < -10 || locationY > 10 || locationY < -10) {
 			throw new CustomerException("Customer is located too far away from the restaurant to deliver.");
 		} else {

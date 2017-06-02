@@ -16,8 +16,10 @@ import asgn2Restaurant.PizzaRestaurant;
  * A class that that tests the methods relating to the handling of Customer objects in the asgn2Restaurant.PizzaRestaurant
  * class as well as processLog and resetDetails.
  * 
- * @author Person A
+ * @author Mustafa Hussaini
+ * 
  */
+
 public class RestaurantCustomerTests {
 	private static final String FILE_PATH = "./testFiles/";
 	private static final String VALID_CSV_NAME = "test_valid_order.txt";

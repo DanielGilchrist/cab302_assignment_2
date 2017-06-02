@@ -18,9 +18,10 @@ import asgn2Restaurant.PizzaRestaurant;
  * A class that tests the methods relating to the handling of Pizza objects in the asgn2Restaurant.PizzaRestaurant class as well as
  * processLog and resetDetails.
  * 
- * @author Person B
+ * @author Daniel Gilchrist
  *
  */
+
 public class RestaurantPizzaTests {
 	private static final String FILE_PATH = "./testFiles/";
 	private static final String VALID_CSV_NAME = "test_valid_order.txt";

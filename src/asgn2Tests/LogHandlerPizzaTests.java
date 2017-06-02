@@ -22,9 +22,10 @@ import asgn2Restaurant.LogHandler;
  * A class that tests the methods relating to the creation of Pizza objects in
  * the asgn2Restaurant.LogHander class.
  * 
- * @author Person B
+ * @author Daniel Gilchrist
  * 
  */
+
 @SuppressWarnings("unused")
 public class LogHandlerPizzaTests {
     private static final String FILE_PATH = "./testFiles/";

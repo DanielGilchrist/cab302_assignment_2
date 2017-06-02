@@ -22,7 +22,7 @@ import asgn2Pizzas.PizzaFactory;
  * return Pizza and Customer object - either as an individual Pizza/Customer
  * object or as an ArrayList of Pizza/Customer objects.
  * 
- * @author Mustafa Hussaini and Person B
+ * @author Mustafa Hussaini and Daniel Gilchrist
  *
  */
 public class LogHandler {
@@ -46,9 +46,7 @@ public class LogHandler {
      *             semantic errors above
      * 
      */
-    public static ArrayList<Customer> populateCustomerDataset(String filename)
-            throws CustomerException, LogHandlerException {
-
+    public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException {
         ArrayList<Customer> customers = new ArrayList<>();
         
         try {
@@ -58,7 +56,7 @@ public class LogHandler {
         	
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String line = null;
-
+            
             while ((line = bufferedReader.readLine()) != null) {
                 customers.add(createCustomer(line));
             }
@@ -94,14 +92,12 @@ public class LogHandler {
      * 
      */
     public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException {
-
         ArrayList<Pizza> pizzas = new ArrayList<>();
 
         try {
         	if (fileIsEmpty(filename)) {
         		throw new LogHandlerException("File is empty");
         	}
-        		
         		
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String line = null;

@@ -15,9 +15,10 @@ import asgn2Pizzas.VegetarianPizza;
 /** 
  * A class that tests the asgn2Pizzas.PizzaFactory class.
  * 
- * @author Person B 
+ * @author Daniel Gilchrist
  * 
  */
+
 @SuppressWarnings("unused")
 public class PizzaFactoryTests {
 	private static final int QUANTITY = 3;
