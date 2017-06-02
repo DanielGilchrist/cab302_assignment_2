@@ -186,7 +186,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 String type = customer.getCustomerType();
                 String location = String.format("(%d, %d)", customer.getLocationX(), customer.getLocationY());
                 double distance = customer.getDeliveryDistance();
-                Object[] row = { name, mobileNumber, type, location, Double.toString(distance) };
+                Object[] row = { name, mobileNumber, type, location, String.format("%.2f blocks", distance) };
                 tableModel1.addRow(row);
             }
         }
@@ -209,8 +209,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 double price = pizza.getOrderPrice();
                 double cost = pizza.getOrderCost();
                 double profit = pizza.getOrderProfit();
-                Object[] row = { type, Integer.toString(quantity), Double.toString(price), Double.toString(cost),
-                        Double.toString(profit) };
+                Object[] row = { type, Integer.toString(quantity), String.format("%.2f", price), String.format("%.2f", cost),
+                		String.format("%.2f", profit) };
                 tableModel2.addRow(row);
             }
         }
