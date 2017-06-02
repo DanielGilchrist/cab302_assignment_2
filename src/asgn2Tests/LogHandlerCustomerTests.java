@@ -84,6 +84,11 @@ public class LogHandlerCustomerTests {
         assertTrue("Driver Delivery".equals(customers.get(0).getCustomerType()));
     }
 
+    @Test(expected = LogHandlerException.class)
+    public void testMissingCustomerInfo() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "test_missing_cust_info.txt");
+    }
+
     @Test
     public void testFileWithExtraParametersLastLineIntegrity() throws CustomerException, LogHandlerException {
         ArrayList<Customer> customers = new ArrayList<>();
@@ -105,7 +110,7 @@ public class LogHandlerCustomerTests {
         ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "last_Line_return.txt");
     }
 
-    // ----------------------------- empty log ------------------------------//
+    // ----------------------------- empty log ------------------------------ //
     @Test(expected = LogHandlerException.class)
     public void testEmptyLogFile() throws CustomerException, LogHandlerException {
         ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "empty.txt");
@@ -114,6 +119,44 @@ public class LogHandlerCustomerTests {
     @Test(expected = LogHandlerException.class)
     public void testNoCommaFile() throws CustomerException, LogHandlerException {
         ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "no_comma.txt");
+    }
+
+    // -------------------- customer exception errors ---------------------- //
+
+    @Test(expected = CustomerException.class)
+    public void testInvalidName() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "invalid_name.txt");
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testNoName() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "no_name.txt");
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testLongName() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "long_name.txt");
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testInvalidCustomerCode() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "test_invalid_cust_code.txt");
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testInvalidLocationX() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "test_invalid_location_x.txt");
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testInvalidLocationY() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "test_invalid_location_y.txt");
+    }
+
+    @Test(expected = CustomerException.class)
+    public void testInvalidMobileNumber() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler
+                .populateCustomerDataset(FILE_PATH + "test_invalid_mobile_number.txt");
     }
 
 }
