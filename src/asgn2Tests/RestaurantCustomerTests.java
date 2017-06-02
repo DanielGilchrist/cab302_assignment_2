@@ -35,52 +35,49 @@ public class RestaurantCustomerTests {
 		customer3 = CustomerFactory.getCustomer("PUC", "Oroku Saki", "0111222333", 0, 0);
 	}
 	
-	@Test
-	(expected = CustomerException.class)
+	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidCustomerCode() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_invalid_cust_code.txt");
 	}
 	
-	@Test
-	(expected = CustomerException.class)
+	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidName() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_invalid_name.txt");
 	}
 	
-	@Test
-	(expected = CustomerException.class)
+	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidMobileNumber() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_invalid_mobile_number.txt");
 	}
 	
-	@Test
-	(expected = CustomerException.class)
+	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidLocationX() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_invalid_location_x.txt");
 	}
 	
-	@Test
-	(expected = CustomerException.class)
+	@Test (expected = CustomerException.class)
 	public void testProcessLogInvalidLocationY() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_invalid_location_y.txt");
 	}
 	
-	@Test
-	(expected = CustomerException.class)
+	@Test (expected = CustomerException.class)
 	public void testProcessLogBlankCustomerInformation() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_blank_cust_info.txt");
 	}
 	
-	// doesn't matter which test file this is in as it isn't
+	// doesn't matter which test file the next two tests are in as they aren't
 	// particularly relevant to either customers or pizza
-	@Test
-	(expected = LogHandlerException.class)
+	@Test (expected = LogHandlerException.class)
 	public void testProcessLogNotCSVFormat() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_not_CSV.txt");
 	}
 	
-	@Test
-	(expected = LogHandlerException.class)
+	@Test (expected = LogHandlerException.class)
+	public void testProcessLogEmptyFile() throws CustomerException, PizzaException, LogHandlerException {
+		pr.processLog("test_empty.txt");
+	}
+	
+	@Test (expected = LogHandlerException.class)
 	public void testProcessLogMissingCustomerInformation() throws CustomerException, PizzaException, LogHandlerException {
 		pr.processLog("test_missing_cust_info.txt");
 	}
