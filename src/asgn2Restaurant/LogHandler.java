@@ -2,7 +2,6 @@ package asgn2Restaurant;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -37,26 +36,27 @@ public class LogHandler {
      * @return an ArrayList of Customer objects from the information contained
      *         in the log file ordered as they appear in the log file.
      * @throws CustomerException
-     *             If the log file contains semantic errors leading that violate
-     *             the customer constraints listed in Section 5.3 of the
-     *             Assignment Specification or contain an invalid customer code
-     *             (passed by another class).
+     *             if the name is empty, white space, or longer than 20
+     *             characters, and/or if mobile number is not 10 digits starting
+     *             by 0, and/or locationX and locationY are less than -10 or
+     *             greater than 10
      * @throws LogHandlerException
      *             If there was a problem with the log file not related to the
      *             semantic errors above
      * 
      */
-    public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException {
+    public static ArrayList<Customer> populateCustomerDataset(String filename)
+            throws CustomerException, LogHandlerException {
         ArrayList<Customer> customers = new ArrayList<>();
-        
+
         try {
-        	if (fileIsEmpty(filename)) {
-        		throw new LogHandlerException("File is empty");
-        	}
-        	
+            if (fileIsEmpty(filename)) {
+                throw new LogHandlerException("File is empty");
+            }
+
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String line = null;
-            
+
             while ((line = bufferedReader.readLine()) != null) {
                 customers.add(createCustomer(line));
             }
@@ -82,10 +82,12 @@ public class LogHandler {
      * @return an ArrayList of Pizza objects from the information contained in
      *         the log file ordered as they appear in the log file. .
      * @throws PizzaException
-     *             If the log file contains semantic errors leading that violate
-     *             the pizza constraints listed in Section 5.3 of the Assignment
-     *             Specification or contain an invalid pizza code (passed by
-     *             another class).
+     *             if quantity is 0, negative or greater than 10, and/or if
+     *             orderTime is before 7pm, or after 11pm, and/ orif delivery
+     *             time is before the order time, or before the opening time,
+     *             and/or if delivery time is less than 10 minutes after the
+     *             order time, and/or if delivery time is greater than 1 hour
+     *             after the order time
      * @throws LogHandlerException
      *             If there was a problem with the log file not related to the
      *             semantic errors above
@@ -95,13 +97,13 @@ public class LogHandler {
         ArrayList<Pizza> pizzas = new ArrayList<>();
 
         try {
-        	if (fileIsEmpty(filename)) {
-        		throw new LogHandlerException("File is empty");
-        	}
-        		
+            if (fileIsEmpty(filename)) {
+                throw new LogHandlerException("File is empty");
+            }
+
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String line = null;
-            
+
             while ((line = bufferedReader.readLine()) != null) {
                 pizzas.add(createPizza(line));
             }
@@ -117,20 +119,20 @@ public class LogHandler {
 
         return pizzas;
     }
-    
+
     private static boolean fileIsEmpty(String filename) throws IOException {
-    	boolean isEmpty;
-    	BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
-    	
-    	if (bufferedReader.readLine() == null) {
-    		isEmpty = true;
-    	} else {
-    		isEmpty = false;
-    	}
-    	
-    	bufferedReader.close();
-    	
-    	return isEmpty;
+        boolean isEmpty;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+
+        if (bufferedReader.readLine() == null) {
+            isEmpty = true;
+        } else {
+            isEmpty = false;
+        }
+
+        bufferedReader.close();
+
+        return isEmpty;
     }
 
     /**
@@ -143,10 +145,10 @@ public class LogHandler {
      * @return- A Customer object containing the information from the line in
      *          the log file
      * @throws CustomerException
-     *             - If the log file contains semantic errors leading that
-     *             violate the customer constraints listed in Section 5.3 of the
-     *             Assignment Specification or contain an invalid customer code
-     *             (passed by another class).
+     *             if the name is empty, white space, or longer than 20
+     *             characters, and/or if mobile number is not 10 digits starting
+     *             by 0, and/or locationX and locationY are less than -10 or
+     *             greater than 10
      * @throws LogHandlerException
      *             - If there was a problem parsing the line from the log file.
      */
@@ -178,10 +180,12 @@ public class LogHandler {
      * @return- A Pizza object containing the information from the line in the
      *          log file
      * @throws PizzaException
-     *             If the log file contains semantic errors leading that violate
-     *             the pizza constraints listed in Section 5.3 of the Assignment
-     *             Specification or contain an invalid pizza code (passed by
-     *             another class).
+     *             if quantity is 0, negative or greater than 10, and/or if
+     *             orderTime is before 7pm, or after 11pm, and/ orif delivery
+     *             time is before the order time, or before the opening time,
+     *             and/or if delivery time is less than 10 minutes after the
+     *             order time, and/or if delivery time is greater than 1 hour
+     *             after the order time
      * @throws LogHandlerException
      *             - If there was a problem parsing the line from the log file.
      */
