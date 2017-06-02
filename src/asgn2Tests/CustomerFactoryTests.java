@@ -19,8 +19,10 @@ import asgn2Exceptions.CustomerException;
  * @author Person A
  *
  */
+
+@SuppressWarnings("unused")
 public class CustomerFactoryTests {
-    // private vairables
+    // private variables
     Customer pickup;
     Customer droneDelivery;
     Customer driverDelivery;
