@@ -19,17 +19,17 @@ import asgn2Restaurant.LogHandler;
  *
  * @author Person A
  */
+
+@SuppressWarnings("unused")
 public class LogHandlerCustomerTests {
 
     private static final String FILE_PATH = "./testFiles/";
-    private LogHandler log;
     private ArrayList<Customer> customerSet;
 
     @Test
     @Before
     public void testLoadFile() throws CustomerException, LogHandlerException {
-        log = new LogHandler();
-        customerSet = log.populateCustomerDataset(FILE_PATH + "valid_test.txt");
+        customerSet = LogHandler.populateCustomerDataset(FILE_PATH + "valid_test.txt");
     }
 
     @Test
@@ -63,35 +63,30 @@ public class LogHandlerCustomerTests {
     // ------------------- Test errors in the log file ----------------------//
     @Test(expected = LogHandlerException.class)
     public void testFileNotExists() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Customer> customers = localLog.populateCustomerDataset(FILE_PATH + "broken_File.txt");
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "broken_File.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParameters() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Customer> customers = localLog.populateCustomerDataset(FILE_PATH + "extra_parameter_first_line.txt");
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "extra_parameter_first_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParametersSecondLine() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Customer> customers = localLog.populateCustomerDataset(FILE_PATH + "extra_parameter_second_line.txt");
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "extra_parameter_second_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParametersLastLine() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Customer> customers = localLog.populateCustomerDataset(FILE_PATH + "extra_parameter_Last_line.txt");
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "extra_parameter_Last_line.txt");
         assertTrue("Driver Delivery".equals(customers.get(0).getCustomerType()));
     }
 
     @Test
     public void testFileWithExtraParametersLastLineIntegrity() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
         ArrayList<Customer> customers = new ArrayList<>();
         try {
-            customers = localLog.populateCustomerDataset(FILE_PATH + "extra_parameter_Last_line.txt");
+            customers = LogHandler.populateCustomerDataset(FILE_PATH + "extra_parameter_Last_line.txt");
         } catch (Exception e) {
             e.getMessage();
         }
@@ -100,21 +95,18 @@ public class LogHandlerCustomerTests {
 
     @Test(expected = LogHandlerException.class)
     public void testFileFirstLineNoReturn() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Customer> customers = localLog.populateCustomerDataset(FILE_PATH + "no_return_first_line.txt");
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "no_return_first_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testErrorInLastLine() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Customer> customers = localLog.populateCustomerDataset(FILE_PATH + "last_Line_return.txt");
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "last_Line_return.txt");
     }
 
     // ----------------------------- empty log ------------------------------//
-    @Test // (expected = LogHandlerException.class)
+    @Test (expected = LogHandlerException.class)
     public void testEmptyLogFile() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Customer> customers = localLog.populateCustomerDataset(FILE_PATH + "empty.txt");
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "empty.txt");
     }
 
 }

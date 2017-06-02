@@ -25,16 +25,15 @@ import asgn2Restaurant.LogHandler;
  * @author Person B
  * 
  */
+@SuppressWarnings("unused")
 public class LogHandlerPizzaTests {
     private static final String FILE_PATH = "./testFiles/";
-    private LogHandler pizzaLog;
     ArrayList<Pizza> pizzas;
 
     @Test
     @Before
     public void testLoadFile() throws PizzaException, LogHandlerException {
-        pizzaLog = new LogHandler();
-        pizzas = pizzaLog.populatePizzaDataset(FILE_PATH + "valid_test.txt");
+        pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "valid_test.txt");
     }
 
     @Test
@@ -55,34 +54,29 @@ public class LogHandlerPizzaTests {
 
     @Test(expected = LogHandlerException.class)
     public void testFileNotExists() throws PizzaException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Pizza> pizzas = localLog.populatePizzaDataset(FILE_PATH + "broken_File.txt");
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "broken_File.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParameters() throws PizzaException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Pizza> pizzas = localLog.populatePizzaDataset(FILE_PATH + "extra_parameter_first_line.txt");
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "extra_parameter_first_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParametersSecondLine() throws PizzaException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Pizza> pizzas = localLog.populatePizzaDataset(FILE_PATH + "extra_parameter_second_line.txt");
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "extra_parameter_second_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParametersLastLine() throws PizzaException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Pizza> pizzas = localLog.populatePizzaDataset(FILE_PATH + "extra_parameter_Last_line.txt");
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "extra_parameter_Last_line.txt");
     }
 
     @Test
     public void testFileWithExtraNewLastLine() throws CustomerException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
         ArrayList<Pizza> pizzas = new ArrayList<>();
         try {
-            pizzas = localLog.populatePizzaDataset(FILE_PATH + "extra_parameter_Last_line.txt");
+            pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "extra_parameter_Last_line.txt");
         } catch (Exception e) {
             e.getMessage();
         }
@@ -91,13 +85,11 @@ public class LogHandlerPizzaTests {
 
     @Test(expected = LogHandlerException.class)
     public void testFileFirstLineNoReturn() throws PizzaException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Pizza> pizzas = localLog.populatePizzaDataset(FILE_PATH + "no_return_first_line.txt");
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "no_return_first_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testErrorInLastLine() throws PizzaException, LogHandlerException {
-        LogHandler localLog = new LogHandler();
-        ArrayList<Pizza> pizzas = localLog.populatePizzaDataset(FILE_PATH + "last_Line_return.txt");
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "last_Line_return.txt");
     }
 }
