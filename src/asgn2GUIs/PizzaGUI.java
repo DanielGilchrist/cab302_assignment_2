@@ -148,34 +148,45 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     private void getCustomerData() throws CustomerException {
-        for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
-            Customer customer = restaurant.getCustomerByIndex(i);
+        // tries to access tableModel1 if exception is thrown that means data
+    	// can be added since there's nothing there otherwise does nothing
+    	try {
+    		tableModel1.getValueAt(0, 0);
+    	} catch (ArrayIndexOutOfBoundsException e) { 
+    		for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
+                Customer customer = restaurant.getCustomerByIndex(i);
 
-            String name = customer.getName();
-            String mobileNumber = customer.getMobileNumber();
-            String type = customer.getCustomerType();
-            String location = String.format("(%d, %d)", customer.getLocationX(), customer.getLocationY());
-            double distance = customer.getDeliveryDistance();
-            Object[] row = { name, mobileNumber, type, location, Double.toString(distance) };
-            tableModel1.addRow(row);
-        }
+                String name = customer.getName();
+                String mobileNumber = customer.getMobileNumber();
+                String type = customer.getCustomerType();
+                String location = String.format("(%d, %d)", customer.getLocationX(), customer.getLocationY());
+                double distance = customer.getDeliveryDistance();
+                Object[] row = { name, mobileNumber, type, location, Double.toString(distance) };
+                tableModel1.addRow(row);
+            }
+    	}
 
     }
 
     private void getPizzaData() throws PizzaException {
-        for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
-            Pizza pizza = restaurant.getPizzaByIndex(i);
+    	// tries to access tableModel2 if exception is thrown that means data
+    	// can be added since there's nothing there otherwise does nothing
+    	try {
+    		tableModel2.getValueAt(0, 0);
+    	} catch (ArrayIndexOutOfBoundsException e) {
+    		for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
+                Pizza pizza = restaurant.getPizzaByIndex(i);
 
-            String type = pizza.getPizzaType();
-            int quantity = pizza.getQuantity();
-            double price = pizza.getOrderPrice();
-            double cost = pizza.getOrderCost();
-            double profit = pizza.getOrderProfit();
-            Object[] row = { type, Integer.toString(quantity), Double.toString(price), Double.toString(cost),
-                    Double.toString(profit) };
-            tableModel2.addRow(row);
-        }
-
+                String type = pizza.getPizzaType();
+                int quantity = pizza.getQuantity();
+                double price = pizza.getOrderPrice();
+                double cost = pizza.getOrderCost();
+                double profit = pizza.getOrderProfit();
+                Object[] row = { type, Integer.toString(quantity), Double.toString(price), Double.toString(cost),
+                        Double.toString(profit) };
+                tableModel2.addRow(row);
+            }
+    	}
     }
 
     // -------------------------- event handlers --------------------------- //
