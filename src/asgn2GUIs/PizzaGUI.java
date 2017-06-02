@@ -175,7 +175,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      * A method that displays the data onto the customers table
      */
     private void getCustomerData() throws CustomerException {
-        // tries to access tableModel1 if exception is thrown that means data
+        // tries to access tableModelCustomer if exception is thrown that means data
         // can be added since there's nothing there otherwise does nothing
         try {
             tableModelCustomer.getValueAt(0, 0);
@@ -199,7 +199,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      * A method that displays data onto the pizza table
      */
     private void getPizzaData() throws PizzaException {
-        // tries to access tableModel2 if exception is thrown that means data
+        // tries to access tableModelPizza if exception is thrown that means data
         // can be added since there's nothing there otherwise does nothing
         try {
             tableModelPizza.getValueAt(0, 0);
