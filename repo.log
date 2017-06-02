@@ -1,0 +1,513 @@
+*   daed208 : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+|\  
+| *   b3ce7db : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+| |\  
+| * | 6b2b336 : Finished PDF file
+* | | fddd01c : Re-generated Javadoc
+| |/  
+|/|   
+* | 3528d62 : Fixed the formatting issues
+* | 1359672 : Updated JavaDocs
+* | 42b5e7c : Updated all package-info.java files
+|/  
+* 5eebe58 : Added some more comments and cleaned up the GUI
+* bbea1f6 : Comments, author names, and formatting
+* 9647671 : Fixed code to account for tests being moved into a the testFiles folder
+*   d0aee1c : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+|\  
+| * 5f9c5e1 : Completed the LogHandlerCustomer tests
+* | 91fa343 : Fixed display messages
+|/  
+* f56f4f3 : Added catches for different error messages
+* c818dfd : Finished GUI (HOPEFULLY)
+* 2f1e1e4 : Fixed reset button
+* 4c2563b : Fixed loading second and third files
+*   fc18ad5 : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+|\  
+| * c313849 : Order Cost errors
+* | 0dd9b75 : Fixed issue where if analyse buttons were pressed more than once it would keep adding the same data
+|/  
+* de983dd : Fixed the GUI loading data
+* 853aab2 : GUI partially fixed
+* 811a65d : Added test for empty file when testing processLog in the PizzaRestaurant class
+* 03ed0ed : Fixed warnings and spelling mistake
+* 9d95f78 : Fixed errors
+* 22fbca1 : Added code to handle empty files
+* e58768b : LogHandler tests are not completed yet
+* 6fd252f : Committing progress
+* 4732667 : Fixed some of the test cases and added two buttons for loading customer and pizza data
+* 3588492 : Fixed up some errors found when writing tests
+* f5187fc : Completed RestaurantPizzaTests
+* 647a5a7 : Completed RestaurantCustomerTests
+* 3b04289 : Fixed incorrect message
+* 37a3027 : Created test data for RestaurantCustomerTests and RestaurantPizzaTests
+* 923737b : Open file completed
+* bfb4eb4 : Removed unnecessary imports
+* 98e1f0f : Started LogHandlerCustomerTests
+* 029d208 : Changed the SuppressWarning("unused") annotations to just one annotation above the class
+* 53bdb06 : Got rid of some annoying warnings
+* 2d298db : Fixed poorly written tests
+*   adee74b : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+|\  
+| * 5238175 : Finished processLog method in PizzaRestaurant.java
+| * d694883 : Implemented methods in LogHandler.java
+| * 048e6be : Fixed times in some tests
+* | b48ba4c : Added the GUI
+|/  
+* 953510c : Wrote some code for the processLog method. Currently reads in each line and tries to parses it but still needs error checking and what not.
+* bd6185a : Completed all the methods in PizzaRestaurant except processLog
+* 67c44c2 : Added another test
+* 54b019d : Removed a bunch of whitespace I forgot about
+* 3dba41d : PizzaTests and PizzaFactoryTests completed (I hope)
+* 094479c : Added more test cases to Customer and fixed Pizza time validation
+* 2970c4e : Fixed some small problems that were causing tests to fail
+*   aecbde4 : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+|\  
+| * 733238d : Tiny message change :^)
+* |   c92358b : Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+|\ \  
+| |/  
+| * 2eb04b8 : Fixed to pass junit tests
+* | 44ca970 : Fixed name testing for the Customer.java
+|/  
+* c6edb8b : Fixed Customer type checking test
+* 08da1d6 : Fixed minor error
+*   c3c5d83 : Merge branch 'mustafa_asgn2'
+|\  
+| * a87a5a1 : Added some tests and fixed an Exception for Pizza if time<10mins
+| * c7eb513 : Edited the Pizza class so it can handle other pizza types as well
+| * 38851f9 : Pizza package done
+* | 69a25dd : Committing progress
+* | 21489c9 : Added more exceptions in the constructor to ensure valid location coordinates and changed the check for customer name length to be inclusive (names of length 1 and 20 are valid)
+* | 8e170c2 : Added exceptions in the constructor (oops) and removed the method "containsOnlyWhiteSpaces" in favour of a better solution (double oops)
+* | a0a9325 : Finished Customer class
+* | 1411f3b : Committing so I can continue working on desktop
+|/  
+* d98a34c : Initial commit with assignment template
+* bf19534 : Initial commitcommit daed208e4907b966e040a614e09776fd14c23565
+Merge: fddd01c b3ce7db
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 23:02:19 2017 +1000
+
+    Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+
+commit fddd01cdd8401adc924933851e99e7ffbffd6f64
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 23:01:25 2017 +1000
+
+    Re-generated Javadoc
+
+commit 3528d626036cfd6599362ffd88c58d3e479ee657
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 23:00:11 2017 +1000
+
+    Fixed the formatting issues
+
+commit b3ce7dbb979f8ff716ff7db20e8628f737d97011
+Merge: 6b2b336 3528d62
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 22:58:30 2017 +1000
+
+    Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+
+commit 6b2b33611dea7693630361970edc4df5c01b9bca
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 22:58:09 2017 +1000
+
+    Finished PDF file
+
+commit 13596728764dd02bb6b3258f8aeb52a31b8b0ad6
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 22:50:21 2017 +1000
+
+    Updated JavaDocs
+
+commit 42b5e7cf29ccfa6b4d695ff0a28b5377dce611e9
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 22:47:51 2017 +1000
+
+    Updated all package-info.java files
+
+commit 5eebe588b3707c7a69376d054c1127f681abbfe4
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 22:31:05 2017 +1000
+
+    Added some more comments and cleaned up the GUI
+
+commit bbea1f63e79787b5b76a96e68dd6963dbfc8b68a
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 21:38:43 2017 +1000
+
+    Comments, author names, and formatting
+
+commit 96476718f8e676c5b352ae9d9cde0942fa8ef4cd
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 21:29:48 2017 +1000
+
+    Fixed code to account for tests being moved into a the testFiles folder
+
+commit d0aee1c0550c10b9aeb5e0ee84bb84b8121006d0
+Merge: 91fa343 5f9c5e1
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 21:21:42 2017 +1000
+
+    Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+
+commit 91fa343b499dce703e85e414861f44f8e3313320
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 21:21:12 2017 +1000
+
+    Fixed display messages
+
+commit 5f9c5e169a2c8b9074141ac12fe3aaef1005f11c
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 21:20:58 2017 +1000
+
+    Completed the LogHandlerCustomer tests
+
+commit f56f4f3954e9e6088004e93d0f08a8df3d2e4452
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 21:07:20 2017 +1000
+
+    Added catches for different error messages
+
+commit c818dfd366394f2f1189df7ffe9d48eb03b8c354
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 20:59:13 2017 +1000
+
+    Finished GUI (HOPEFULLY)
+
+commit 2f1e1e4029d4d84392f9d133c1e1969faa2c548f
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 20:12:34 2017 +1000
+
+    Fixed reset button
+
+commit 4c2563ba7bb15e8732c9bc3b2f89ea57d2054abe
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 20:09:04 2017 +1000
+
+    Fixed loading second and third files
+
+commit fc18ad5d11d4e16f2aa79215325ed058446bca7b
+Merge: 0dd9b75 c313849
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 19:47:29 2017 +1000
+
+    Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+
+commit 0dd9b7501d9254f4b2f0762b3c7b6a308f0559a0
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 19:47:04 2017 +1000
+
+    Fixed issue where if analyse buttons were pressed more than once it would keep adding the same data
+
+commit c313849d49eb7ba9a57d7827490f72df3de5edfb
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 19:43:07 2017 +1000
+
+    Order Cost errors
+
+commit de983dd458b6386aa4b588cd4479ff9e6d073f8d
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 19:31:23 2017 +1000
+
+    Fixed the GUI loading data
+
+commit 853aab2b6d524b1d5ed13ffde5b8ddce77c28baa
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 19:27:04 2017 +1000
+
+    GUI partially fixed
+
+commit 811a65d31e49ebc7c53f7ecc4204ba64fb72d7f0
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 19:15:49 2017 +1000
+
+    Added test for empty file when testing processLog in the PizzaRestaurant class
+
+commit 03ed0edab4f9d146f973f7117e53849cbcb9311d
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 19:04:43 2017 +1000
+
+    Fixed warnings and spelling mistake
+
+commit 9d95f78bd3847b8f1fbe12b48de708c258e1edfc
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 19:03:37 2017 +1000
+
+    Fixed errors
+
+commit 22fbca19f0f8ba438e2c8c0e065ddad1cbd7ec5c
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 19:03:07 2017 +1000
+
+    Added code to handle empty files
+
+commit e58768be906ede5eb846603b4c5d060249cca3c6
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 18:39:22 2017 +1000
+
+    LogHandler tests are not completed yet
+
+commit 6fd252f0bc5fc4a3df33237e551e0a77188c13b6
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Fri Jun 2 18:29:23 2017 +1000
+
+    Committing progress
+
+commit 473266738b29691384a5eb3e3215b6ba493ea728
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Fri Jun 2 00:05:39 2017 +1000
+
+    Fixed some of the test cases and added two buttons for loading customer and pizza data
+
+commit 358849216cea682b2cddd9e36bfb49a59e49e4c6
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu Jun 1 23:59:05 2017 +1000
+
+    Fixed up some errors found when writing tests
+
+commit f5187fc3636defb0d14d4df68255ef2c8b5166f9
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu Jun 1 23:58:48 2017 +1000
+
+    Completed RestaurantPizzaTests
+
+commit 647a5a74f50849f019779c3a3cc4020dd3919ea7
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu Jun 1 23:58:30 2017 +1000
+
+    Completed RestaurantCustomerTests
+
+commit 3b0428976dc429e845fe5a60f358564baf1ec628
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu Jun 1 23:58:05 2017 +1000
+
+    Fixed incorrect message
+
+commit 37a3027afac518c4792851c436185962eed37b41
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu Jun 1 23:57:35 2017 +1000
+
+    Created test data for RestaurantCustomerTests and RestaurantPizzaTests
+
+commit 923737b493cb390a7150784363c0caefbf1b698a
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Thu Jun 1 21:00:02 2017 +1000
+
+    Open file completed
+
+commit bfb4eb456bd23c61bab3e0fa4914e4f088eb3402
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 19:52:18 2017 +1000
+
+    Removed unnecessary imports
+
+commit 98e1f0fbfa9bd9c85bc99234966b8790ba7380cd
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 19:51:09 2017 +1000
+
+    Started LogHandlerCustomerTests
+
+commit 029d2082f536e4eaa938bd909e42da783b4c5323
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 19:29:54 2017 +1000
+
+    Changed the SuppressWarning("unused") annotations to just one annotation above the class
+
+commit 53bdb063a20063eaf4793b51c9881cdc3ded560a
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 19:26:42 2017 +1000
+
+    Got rid of some annoying warnings
+
+commit 2d298db41c53842b4b347c1ba999f788072678b8
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 19:24:16 2017 +1000
+
+    Fixed poorly written tests
+
+commit adee74b4db0254c38827ad24eaec9d98d8d7f3f8
+Merge: b48ba4c 5238175
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Thu Jun 1 18:43:13 2017 +1000
+
+    Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+
+commit b48ba4cc4ba0487a88119642931f859aa8027fbf
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Thu Jun 1 18:36:42 2017 +1000
+
+    Added the GUI
+
+commit 52381754863186ed3655c657b14f51178823ed66
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 17:34:13 2017 +1000
+
+    Finished processLog method in PizzaRestaurant.java
+
+commit d6948832c7543e89be83abc5a41b5f14a4397b88
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 17:33:41 2017 +1000
+
+    Implemented methods in LogHandler.java
+
+commit 048e6befc331787359563d10a631789b610ab469
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 17:33:13 2017 +1000
+
+    Fixed times in some tests
+
+commit 953510cf9f57acedb578c2fa9cea0d3d6e92deae
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Thu Jun 1 02:09:44 2017 +1000
+
+    Wrote some code for the processLog method. Currently reads in each line and tries to parses it but still needs error checking and what not.
+
+commit bd6185ae5d8fa45cf885057b5e16ce3cc96a868f
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Wed May 31 22:35:58 2017 +1000
+
+    Completed all the methods in PizzaRestaurant except processLog
+
+commit 67c44c29f99ae5c381d6f249d9c0e1703c87e4f8
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Wed May 31 22:34:39 2017 +1000
+
+    Added another test
+
+commit 54b019d9d9ec7a2b07a1f90b14df3032edbdca61
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Wed May 31 22:22:29 2017 +1000
+
+    Removed a bunch of whitespace I forgot about
+
+commit 3dba41d88b503a5bae65c013c215b1e2c1e4dcdc
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Wed May 31 22:17:01 2017 +1000
+
+    PizzaTests and PizzaFactoryTests completed (I hope)
+
+commit 094479c6f810fc4b07d15bcca224dea65359a2c0
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Wed May 31 18:59:38 2017 +1000
+
+    Added more test cases to Customer and fixed Pizza time validation
+
+commit 2970c4e334e2af3a2654a54280b4fe828b4e2d1b
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Wed May 31 17:07:27 2017 +1000
+
+    Fixed some small problems that were causing tests to fail
+
+commit aecbde4c2812a2f84fca54f422e0a0a721ac18f7
+Merge: c92358b 733238d
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Wed May 31 00:16:33 2017 +1000
+
+    Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+
+commit c92358b6f7808223cb42f90c1b35efdbbe87ec09
+Merge: 44ca970 2eb04b8
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Wed May 31 00:10:25 2017 +1000
+
+    Merge branch 'master' of https://github.com/DanielGilchrist/cab302_assignment_2
+
+commit 44ca9704e2d6e5654c76a56ad221da17399c11de
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Wed May 31 00:09:28 2017 +1000
+
+    Fixed name testing for the Customer.java
+
+commit 733238d9399402ece87396ccc45e17e8e0ffe472
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Wed May 31 00:07:59 2017 +1000
+
+    Tiny message change :^)
+
+commit 2eb04b840c5fb09c4755403f05426018607d75dc
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Wed May 31 00:06:11 2017 +1000
+
+    Fixed to pass junit tests
+
+commit c6edb8b4bf183d9083140199188c664374116b6e
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Tue May 30 23:51:03 2017 +1000
+
+    Fixed Customer type checking test
+
+commit 08da1d6ecf3248a4763af4f241af347a5c848106
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Tue May 30 23:37:24 2017 +1000
+
+    Fixed minor error
+
+commit c3c5d8327072dc71dbd488fa5f821713bde24eba
+Merge: 69a25dd a87a5a1
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Tue May 30 23:30:45 2017 +1000
+
+    Merge branch 'mustafa_asgn2'
+
+commit 69a25dd6c9756a9209617e4b422428578b0ed630
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Tue May 30 23:25:57 2017 +1000
+
+    Committing progress
+
+commit a87a5a1e686100f8c7261d68297a8a5439e6d975
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Tue May 30 02:08:06 2017 +1000
+
+    Added some tests and fixed an Exception for Pizza if time<10mins
+
+commit 21489c954671743748fa075a3ef5128e955ff5d6
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu May 11 22:19:45 2017 +1000
+
+    Added more exceptions in the constructor to ensure valid location coordinates and changed the check for customer name length to be inclusive (names of length 1 and 20 are valid)
+
+commit 8e170c2bce3a3d9bd0d9c38b36353bc68daaa4cb
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu May 11 20:21:52 2017 +1000
+
+    Added exceptions in the constructor (oops) and removed the method "containsOnlyWhiteSpaces" in favour of a better solution (double oops)
+
+commit a0a932518880c1eacc1e1c81766630e502d97c4d
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Thu May 11 19:20:55 2017 +1000
+
+    Finished Customer class
+
+commit c7eb51384cbbf6e69661b559ce941b5fcd8b6653
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Thu May 11 18:58:39 2017 +1000
+
+    Edited the Pizza class so it can handle other pizza types as well
+
+commit 38851f9965ca52fdc7bce8fb300a641094ccfbde
+Author: MxtfV <mustafa.logan@outlook.com.au>
+Date:   Sat May 6 14:43:50 2017 +1000
+
+    Pizza package done
+
+commit 1411f3be7627dfd69572ebfa80be981fba20b85e
+Author: DANIEL\Daniel Gilchrist <daniel.gilchrist@connect.qut.edu.au>
+Date:   Fri May 5 15:35:09 2017 +1000
+
+    Committing so I can continue working on desktop
+
+commit d98a34cfd573d681ff16e2aa65464b7598ac8158
+Author: Daniel Gilchrist <danielgilchrist@outlook.com.au>
+Date:   Mon May 1 21:05:56 2017 +1000
+
+    Initial commit with assignment template
+
+commit bf19534aa5bfbb6b46237389b3eaf20dba238561
+Author: Daniel Gilchrist <DanielGilchrist@users.noreply.github.com>
+Date:   Mon May 1 21:01:59 2017 +1000
+
+    Initial commit

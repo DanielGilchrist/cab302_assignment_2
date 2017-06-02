@@ -78,8 +78,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     private JTable customerDataTable;
     private JTable pizzaDataTable;
 
-    private DefaultTableModel tableModel1;
-    private DefaultTableModel tableModel2;
+    private DefaultTableModel tableModelCustomer;
+    private DefaultTableModel tableModelPizza;
 
     private JFileChooser file = null;
 
@@ -145,8 +145,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      * A method that will perform when the reset button is pressed.
      */
     private void reset() {
-        tableModel1.setRowCount(0);
-        tableModel2.setRowCount(0);
+        tableModelCustomer.setRowCount(0);
+        tableModelPizza.setRowCount(0);
         restaurant.resetDetails();
         message.setForeground(new Color(9, 140, 50));
         logFileLoaded = false;
@@ -157,6 +157,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      * A method that displays the total distance traveled
      */
     private void calculateDistance() {
+        message.setForeground(Color.WHITE);
         JOptionPane.showMessageDialog(null,
                 String.format("Distance travelled for today is %.2f blocks", restaurant.getTotalDeliveryDistance()));
     }
@@ -165,6 +166,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      * A method that displays the total profit made on the particular date
      */
     private void calculateProfit() {
+        message.setForeground(Color.WHITE);
         JOptionPane.showMessageDialog(null,
                 String.format("Total profit for today is $%.2f", restaurant.getTotalProfit()));
     }
@@ -176,7 +178,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         // tries to access tableModel1 if exception is thrown that means data
         // can be added since there's nothing there otherwise does nothing
         try {
-            tableModel1.getValueAt(0, 0);
+            tableModelCustomer.getValueAt(0, 0);
         } catch (ArrayIndexOutOfBoundsException e) {
             for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
                 Customer customer = restaurant.getCustomerByIndex(i);
@@ -186,8 +188,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 String type = customer.getCustomerType();
                 String location = String.format("(%d, %d)", customer.getLocationX(), customer.getLocationY());
                 double distance = customer.getDeliveryDistance();
+
                 Object[] row = { name, mobileNumber, type, location, String.format("%.2f blocks", distance) };
-                tableModel1.addRow(row);
+                tableModelCustomer.addRow(row);
             }
         }
     }
@@ -199,7 +202,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         // tries to access tableModel2 if exception is thrown that means data
         // can be added since there's nothing there otherwise does nothing
         try {
-            tableModel2.getValueAt(0, 0);
+            tableModelPizza.getValueAt(0, 0);
         } catch (ArrayIndexOutOfBoundsException e) {
             for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
                 Pizza pizza = restaurant.getPizzaByIndex(i);
@@ -209,9 +212,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 double price = pizza.getOrderPrice();
                 double cost = pizza.getOrderCost();
                 double profit = pizza.getOrderProfit();
+
                 Object[] row = { type, Integer.toString(quantity), String.format("%.2f", price), String.format("%.2f", cost),
                 		String.format("%.2f", profit) };
-                tableModel2.addRow(row);
+                tableModelPizza.addRow(row);
             }
         }
     }
@@ -298,14 +302,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      * Constructs the customer table in a Scroll pane
      */
     private JScrollPane setCustomerTable(String[] colName, Object[][] data) {
-        tableModel1 = new DefaultTableModel(data, colName) {
+        tableModelCustomer = new DefaultTableModel(data, colName) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        customerDataTable = new JTable(tableModel1);
+        customerDataTable = new JTable(tableModelCustomer);
         customerDataTable.setFont(new Font("Comic Sans", Font.PLAIN, 13));
         JScrollPane scrollPane = new JScrollPane(customerDataTable);
         customerDataTable.setFillsViewportHeight(true);
@@ -316,14 +320,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
      * Constructs the pizza table in a Scroll pane
      */
     private JScrollPane setPizzaTable(String[] colName, Object[][] data) {
-        tableModel2 = new DefaultTableModel(data, colName) {
+        tableModelPizza = new DefaultTableModel(data, colName) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        pizzaDataTable = new JTable(tableModel2);
+        pizzaDataTable = new JTable(tableModelPizza);
         pizzaDataTable.setFont(new Font("Comic Sans", Font.PLAIN, 13));
         JScrollPane scrollPane = new JScrollPane(pizzaDataTable);
         pizzaDataTable.setFillsViewportHeight(true);
