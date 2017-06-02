@@ -103,4 +103,36 @@ public class LogHandlerPizzaTests {
     public void testNoCommaFile() throws PizzaException, LogHandlerException {
         ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "no_comma.txt");
     }
+
+    // --------------------- pizza exception errors ------------------------ //
+
+    @Test(expected = PizzaException.class)
+    public void testBlankPizzaInfo() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "test_blank_pizza_info.txt");
+    }
+
+    @Test(expected = PizzaException.class)
+    public void testInvalidDeliveryTime() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "test_invalid_delivery_time.txt");
+    }
+
+    @Test(expected = PizzaException.class)
+    public void testInvalidOrderTime() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "test_invalid_order_time.txt");
+    }
+
+    @Test(expected = PizzaException.class)
+    public void testInvalidPizzaCode() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "test_invalid_pizza_code.txt");
+    }
+
+    @Test(expected = PizzaException.class)
+    public void testInvalidQuantity() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "test_invalid_quantity.txt");
+    }
+
+    @Test(expected = LogHandlerException.class)
+    public void testMissingPizzaInfo() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "test_missing_pizza_info.txt");
+    }
 }
