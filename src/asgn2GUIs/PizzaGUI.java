@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 import asgn2Restaurant.PizzaRestaurant;
@@ -127,8 +128,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 message.setText("File was imported successfully!");
                 
                 logFileLoaded = true;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Failed to open log file please try again");
+            } catch (PizzaException e) {
+                JOptionPane.showMessageDialog(null, "Incorrect pizza details in log file.");
+            } catch (CustomerException e) {
+            	JOptionPane.showMessageDialog(null, "Incorrect customer details in log file.");
+            } catch (LogHandlerException e) {
+            	JOptionPane.showMessageDialog(null, "Failed to open log file. Check that there are no formatting errors and try again.");
             }
         } else {
             // No file was selected
@@ -382,31 +387,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     @Override
     public void actionPerformed(ActionEvent event) {
         Object src = event.getSource();
-        /*if (src == load) {
-            load();
-        } else if (src == profitCalculator) {
-        	if (logFileLoaded) {
-        		calculateProfit();	
-        	}
-        } else if (src == distanceCalculator) {
-        	if (logFileLoaded) {
-        		calculateDistance();
-        	}
-        } else if (src == reset) {
-        	if (logFileLoaded) {
-        		reset();	
-        	}
-        } else if (src == loadCustomer) {
-        	if (logFileLoaded)
-            getCustomerData();
-            JOptionPane.showMessageDialog(null, "Customers weren't loaded correctly please try loading the log file again");
-        } else if (src == loadPizza) {
-            try {
-                getPizzaData();
-            } catch (PizzaException e) {
-                JOptionPane.showMessageDialog(null, "Pizzas weren't loaded correctly please try loading the log file again");
-            }
-        }*/
         
         if (src == load) {
         	load();
@@ -421,13 +401,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 try {
 					getCustomerData();
 				} catch (CustomerException e) {
-					JOptionPane.showMessageDialog(null, "Customers weren't loaded correctly please try loading the log file again");
+					JOptionPane.showMessageDialog(null, "Customers weren't loaded correctly please try loading the log file again.");
 				}
             } else if (src == loadPizza) {
                 try {
                 	getPizzaData();
 				} catch (PizzaException e) {
-					JOptionPane.showMessageDialog(null, "Pizzas weren't loaded correctly please try loading the log file again");
+					JOptionPane.showMessageDialog(null, "Pizzas weren't loaded correctly please try loading the log file again.");
 				}
             }
         }
