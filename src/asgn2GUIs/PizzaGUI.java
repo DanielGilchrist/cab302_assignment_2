@@ -29,6 +29,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
+import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.PizzaException;
+import asgn2Pizzas.Pizza;
 import asgn2Restaurant.PizzaRestaurant;
 
 /**
@@ -107,14 +111,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         file.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         if (file.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
             try {
-                input = new BufferedReader(new FileReader(file.getSelectedFile()));
+                restaurant.processLog(file.getSelectedFile().toString());
+                
                 message.setForeground(new Color(9, 140, 50));
                 message.setText("File was imported successfully!");
-                // test >>>>>>
-                profitLabel.setText(input.readLine().toString());
-                // test <<<<<<
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Opening file failed!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.toString()/*"Opening file failed!"*/);
             }
         } else {
             // No file was selected
@@ -135,15 +137,36 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     private void calculateProfit() {
-        JOptionPane.showMessageDialog(null, "Calculate Profit");
+        JOptionPane.showMessageDialog(null, restaurant.getTotalProfit());
     }
 
-    private void getCustomerData() {
-        JOptionPane.showMessageDialog(null, "Look at the customer table! ");
+    private void getCustomerData() throws CustomerException {
+    	for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
+        	Customer customer = restaurant.getCustomerByIndex(i);
+        	
+        	customerData[i][0] = customer.getName();
+        	customerData[i][1] = customer.getMobileNumber();
+        	customerData[i][2] = customer.getCustomerType();
+        	customerData[i][3] = String.format("(%d, %d)", 
+        			customer.getLocationX(), customer.getLocationY());
+        	customerData[i][4] = customer.getDeliveryDistance();
+        }
+    	
+    	customerScrollPane = setCustomerTable(customerColNames, customerData);
     }
 
-    private void getPizzaData() {
-        JOptionPane.showMessageDialog(null, "Look at the Pizza table!");
+    private void getPizzaData() throws PizzaException {
+    	for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
+        	Pizza pizza = restaurant.getPizzaByIndex(i);
+        	
+        	pizzaData[i][0] = pizza.getPizzaType();
+        	pizzaData[i][1] = pizza.getQuantity();
+        	pizzaData[i][2] = pizza.getOrderPrice();
+        	pizzaData[i][3] = pizza.getOrderCost();
+        	pizzaData[i][4] = pizza.getOrderProfit();
+        }
+    	
+    	pizzaTable = setCustomerTable(pizzaColNames, pizzaData);
     }
 
     // -------------------------- event handlers --------------------------- //
@@ -316,8 +339,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        Object src = e.getSource();
+    public void actionPerformed(ActionEvent event) {
+        Object src = event.getSource();
         if (src == load) {
             load();
         } else if (src == profitCalculator) {
@@ -327,9 +350,17 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
         } else if (src == reset) {
             reset();
         } else if (src == loadCustomer) {
-            getCustomerData();
+            try {
+				getCustomerData();
+			} catch (CustomerException e) {
+				JOptionPane.showMessageDialog(null, e.toString());
+			}
         } else if (src == loadPizza) {
-            getPizzaData();
+            try {
+				getPizzaData();
+			} catch (PizzaException e) {
+				JOptionPane.showMessageDialog(null, e.toString());
+			}
         }
     }
 
