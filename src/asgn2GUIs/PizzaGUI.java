@@ -152,11 +152,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
     }
 
     private void calculateDistance() {
-        JOptionPane.showMessageDialog(null, restaurant.getTotalDeliveryDistance());
+        JOptionPane.showMessageDialog(null, String.format("Distance travelled for today is %.2f blocks", restaurant.getTotalDeliveryDistance()));
     }
 
     private void calculateProfit() {
-        JOptionPane.showMessageDialog(null, restaurant.getTotalProfit());
+        JOptionPane.showMessageDialog(null, String.format("Total profit for today is $%.2f", restaurant.getTotalProfit()));
     }
 
     private void getCustomerData() throws CustomerException {
