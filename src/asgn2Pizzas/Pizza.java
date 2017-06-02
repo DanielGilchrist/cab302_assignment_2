@@ -144,6 +144,7 @@ public abstract class Pizza {
      *         account the type and quantity of pizzas.
      */
     public final double getOrderCost() {
+        calculateCostPerPizza();
         return (double) quantity * cost;
     }
 
