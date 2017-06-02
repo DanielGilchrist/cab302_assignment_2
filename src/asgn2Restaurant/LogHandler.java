@@ -2,6 +2,7 @@ package asgn2Restaurant;
 
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -49,7 +50,12 @@ public class LogHandler {
             throws CustomerException, LogHandlerException {
 
         ArrayList<Customer> customers = new ArrayList<>();
+        
         try {
+        	if (fileIsEmpty(filename)) {
+        		throw new LogHandlerException("File is empty");
+        	}
+        	
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String line = null;
 
@@ -92,9 +98,14 @@ public class LogHandler {
         ArrayList<Pizza> pizzas = new ArrayList<>();
 
         try {
+        	if (fileIsEmpty(filename)) {
+        		throw new LogHandlerException("File is empty");
+        	}
+        		
+        		
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String line = null;
-
+            
             while ((line = bufferedReader.readLine()) != null) {
                 pizzas.add(createPizza(line));
             }
@@ -109,6 +120,21 @@ public class LogHandler {
         }
 
         return pizzas;
+    }
+    
+    private static boolean fileIsEmpty(String filename) throws IOException {
+    	boolean isEmpty;
+    	BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+    	
+    	if (bufferedReader.readLine() == null) {
+    		isEmpty = true;
+    	} else {
+    		isEmpty = false;
+    	}
+    	
+    	bufferedReader.close();
+    	
+    	return isEmpty;
     }
 
     /**
