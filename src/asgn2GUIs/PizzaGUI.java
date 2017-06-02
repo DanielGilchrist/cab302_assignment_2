@@ -133,6 +133,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
         tableModel1.setRowCount(0);
         tableModel2.setRowCount(0);
+        restaurant.resetDetails();
         profitLabel.setText("Total profit for this day was: ");
         distanceLabel.setText("Total distance travel for this day was: ");
         message.setForeground(new Color(9, 140, 50));
@@ -149,11 +150,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
     private void getCustomerData() throws CustomerException {
         // tries to access tableModel1 if exception is thrown that means data
-    	// can be added since there's nothing there otherwise does nothing
-    	try {
-    		tableModel1.getValueAt(0, 0);
-    	} catch (ArrayIndexOutOfBoundsException e) { 
-    		for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
+        // can be added since there's nothing there otherwise does nothing
+        try {
+            tableModel1.getValueAt(0, 0);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
                 Customer customer = restaurant.getCustomerByIndex(i);
 
                 String name = customer.getName();
@@ -164,17 +165,17 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                 Object[] row = { name, mobileNumber, type, location, Double.toString(distance) };
                 tableModel1.addRow(row);
             }
-    	}
+        }
 
     }
 
     private void getPizzaData() throws PizzaException {
-    	// tries to access tableModel2 if exception is thrown that means data
-    	// can be added since there's nothing there otherwise does nothing
-    	try {
-    		tableModel2.getValueAt(0, 0);
-    	} catch (ArrayIndexOutOfBoundsException e) {
-    		for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
+        // tries to access tableModel2 if exception is thrown that means data
+        // can be added since there's nothing there otherwise does nothing
+        try {
+            tableModel2.getValueAt(0, 0);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            for (int i = 0; i < restaurant.getNumPizzaOrders(); i++) {
                 Pizza pizza = restaurant.getPizzaByIndex(i);
 
                 String type = pizza.getPizzaType();
@@ -186,7 +187,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
                         Double.toString(profit) };
                 tableModel2.addRow(row);
             }
-    	}
+        }
     }
 
     // -------------------------- event handlers --------------------------- //
