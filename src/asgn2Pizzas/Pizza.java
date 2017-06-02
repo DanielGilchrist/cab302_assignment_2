@@ -94,7 +94,7 @@ public abstract class Pizza {
 
     private boolean isValidElapsedTime(LocalTime orderTime, LocalTime deliveryTime) {
         long elapsedTime = Duration.between(orderTime, deliveryTime).toMillis();
-        return elapsedTime <= ONE_HOUR && !(elapsedTime <= TEN_MINUTES);
+        return elapsedTime < ONE_HOUR && !(elapsedTime < TEN_MINUTES);
     }
 
     /**

@@ -68,12 +68,14 @@ public class LogHandlerCustomerTests {
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParameters() throws CustomerException, LogHandlerException {
-        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "extra_parameter_first_line.txt");
+        ArrayList<Customer> customers = LogHandler
+                .populateCustomerDataset(FILE_PATH + "extra_parameter_first_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
     public void testFileWithExtraParametersSecondLine() throws CustomerException, LogHandlerException {
-        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "extra_parameter_second_line.txt");
+        ArrayList<Customer> customers = LogHandler
+                .populateCustomerDataset(FILE_PATH + "extra_parameter_second_line.txt");
     }
 
     @Test(expected = LogHandlerException.class)
@@ -104,9 +106,14 @@ public class LogHandlerCustomerTests {
     }
 
     // ----------------------------- empty log ------------------------------//
-    @Test (expected = LogHandlerException.class)
+    @Test(expected = LogHandlerException.class)
     public void testEmptyLogFile() throws CustomerException, LogHandlerException {
         ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "empty.txt");
+    }
+
+    @Test(expected = LogHandlerException.class)
+    public void testNoCommaFile() throws CustomerException, LogHandlerException {
+        ArrayList<Customer> customers = LogHandler.populateCustomerDataset(FILE_PATH + "no_comma.txt");
     }
 
 }

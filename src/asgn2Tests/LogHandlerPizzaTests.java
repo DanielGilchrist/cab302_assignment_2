@@ -92,4 +92,15 @@ public class LogHandlerPizzaTests {
     public void testErrorInLastLine() throws PizzaException, LogHandlerException {
         ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "last_Line_return.txt");
     }
+
+    // ----------------------------- empty log ------------------------------//
+    @Test(expected = LogHandlerException.class)
+    public void testEmptyLogFile() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "empty.txt");
+    }
+
+    @Test(expected = LogHandlerException.class)
+    public void testNoCommaFile() throws PizzaException, LogHandlerException {
+        ArrayList<Pizza> pizzas = LogHandler.populatePizzaDataset(FILE_PATH + "no_comma.txt");
+    }
 }
